@@ -5,5 +5,15 @@
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="test_string">Press Me</string>
-
+    <string name="help">How to Play</string>
+    <string name="game_rules">Othello starts with the center 4 squares of the board occupied with 2 black and 2 white pieces arranged diagonally. True Reversi (that according to the games original rules) starts with the board empty and the first 2 moves by each player are played into the middle 4 squares with no disk flips. Thus Reversi can start with either a parallel or diagonal layout of the first 4 pieces. Typically computer versions start as per Othello, but the name Othello (along with certain purely aesthetic features of board design) is trademarked so that use of the name Reversi is necessary to avoid legal problems. Play with the Reversi opening, wherein disks of one color line up parallel to those of the other in the center 4 squares, may still be found among enthusiasts in some places. When the game is played according to the original rules, either player may force play into this Reversi opening.</string>
+    <string name="next_button">These are not instructions</string>
+    <string name="title_activity_game__help">Game_Help</string>
+    <string name="start">Start Game</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="dummy_button">Make Your Move</string>
+    <string name="title_activity_game__start">Game_Start</string>
+	<string name="player1">Player 1:</string>
+	<string name="player2">Player 2:</string>
+    
 </resources>

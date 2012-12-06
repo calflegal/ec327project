@@ -22,6 +22,34 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.ec327cassio.reversi.Game_Settings"
+            android:label="@string/title_activity_game__settings"
+            android:parentActivityName="com.example.tutorial.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tutorial.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.ec327cassio.reversi.Game_Help"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_game__help"
+            android:parentActivityName="com.example.tutorial.MainActivity"
+            android:theme="@style/FullscreenTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tutorial.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.ec327cassio.reversi.Game_Start"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_game__start"
+            android:parentActivityName="com.example.tutorial.MainActivity"
+            android:theme="@style/FullscreenTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tutorial.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
