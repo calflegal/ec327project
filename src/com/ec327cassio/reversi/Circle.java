@@ -19,7 +19,7 @@ public class Circle extends View {
         	if (player==true)
         	mPaint.setColor(0xFFFFFFFF);
         	else
-        	mPaint.setColor(0xFFFF0000);
+        	mPaint.setColor(0xff000000); 
         this.x = x;
         this.y = y;
         this.r = r;

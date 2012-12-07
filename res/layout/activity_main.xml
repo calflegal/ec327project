@@ -1,5 +1,17 @@
-<FrameLayout android:id="@+id/main_view"
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
-  android:background="#FF66FF33" />
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:background="#FF000000">
+
+    <GridLayout
+        android:id="@+id/grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="264dp"
+        android:background="#FF006600"
+        android:columnCount="@integer/eight"
+        android:rowCount="@integer/eight" >
+
+    </GridLayout>
+
+</FrameLayout>
