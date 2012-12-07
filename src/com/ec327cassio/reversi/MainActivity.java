@@ -2,6 +2,7 @@ package com.ec327cassio.reversi;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -25,8 +26,17 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		 FrameLayout main = (FrameLayout) findViewById(R.id.main_view);
-		   main.addView(new Circle(this,50,50,25));
+		 
 		
+		   main.setOnTouchListener(new View.OnTouchListener() {
+			    public boolean onTouch(View v, MotionEvent e) {
+			        float x = e.getX();
+			        float y = e.getY();
+			        FrameLayout flView = (FrameLayout) v;
+			        flView.addView(new Circle(flView.getContext(), x,y,25));
+			        return true;
+			    }
+			});	
 	}
 
 	@Override
@@ -35,5 +45,8 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
+
+
+	
 
 }
