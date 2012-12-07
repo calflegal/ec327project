@@ -3,7 +3,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
+
+
 
 public class MainActivity extends Activity {
 	
@@ -21,6 +24,9 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		 FrameLayout main = (FrameLayout) findViewById(R.id.main_view);
+		   main.addView(new Circle(this,50,50,25));
+		
 	}
 
 	@Override
