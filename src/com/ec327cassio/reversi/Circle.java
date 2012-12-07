@@ -13,7 +13,8 @@ public class Circle extends View {
     
     public Circle(Context context, float x, float y, int r) {
         super(context);
-        mPaint.setColor(0xFFFF0000);
+        //mPaint.setColor(0xFFFF0000);
+        mPaint.setColor(0xFFFFFFFF);
         this.x = x;
         this.y = y;
         this.r = r;
