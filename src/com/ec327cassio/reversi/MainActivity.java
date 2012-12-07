@@ -5,6 +5,7 @@ import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.GridLayout;
 import android.widget.Toast;
 
 
@@ -25,16 +26,19 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		 FrameLayout main = (FrameLayout) findViewById(R.id.main_view);
+		 GridLayout main = (GridLayout) findViewById(R.id.grid_view);
 		 
 		
 		   main.setOnTouchListener(new View.OnTouchListener() {
 			    public boolean onTouch(View v, MotionEvent e) {
-			        float x = e.getX();
-			        float y = e.getY();
-			        FrameLayout flView = (FrameLayout) v;
-			        flView.addView(new Circle(flView.getContext(), x,y,25,false));
-			        return true;
+			    	if (e.getAction() == MotionEvent.ACTION_DOWN)  {
+			    		float x = e.getX();
+			    		float y = e.getY();
+			    		GridLayout gridView = (GridLayout) v;
+			    		gridView.addView(new Circle(gridView.getContext(), x,y,25,true));
+			    		return true;
+			    	}
+			    	else return false;
 			    }
 			});	
 	}
