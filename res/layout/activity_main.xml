@@ -10,11 +10,15 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="@string/hello_world" />
-    
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/test_string"
-        android:onClick="showToast" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="46dp"
+        android:layout_marginTop="26dp"
+        android:onClick="showToast"
+        android:text="@string/test_string" />
 
 </RelativeLayout>
