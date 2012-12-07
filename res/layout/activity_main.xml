@@ -4,48 +4,17 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="showToast"
-        android:text="@string/test_string" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button2"
-        android:layout_alignLeft="@+id/button2"
-        android:onClick="gotoHelp"
-        android:text="@string/help" />
-
     <TextView
-        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/button1"
-        android:layout_alignRight="@+id/button3"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:text="@string/hello_world" />
-
+    
     <Button
-        android:id="@+id/Button01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button3"
-        android:layout_alignLeft="@+id/button3"
-        android:onClick="gotoStart"
-        android:text="@string/start" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="89dp"
-        android:layout_toRightOf="@+id/button1"
-        android:onClick="gotoSettings"
-        android:text="@string/menu_settings" />
-
+        android:text="@string/test_string"
+        android:onClick="showToast" />
 
 </RelativeLayout>
