@@ -33,7 +33,7 @@ public class MainActivity extends Activity {
 			        float x = e.getX();
 			        float y = e.getY();
 			        FrameLayout flView = (FrameLayout) v;
-			        flView.addView(new Circle(flView.getContext(), x,y,25));
+			        flView.addView(new Circle(flView.getContext(), x,y,25,false));
 			        return true;
 			    }
 			});	

@@ -9,12 +9,17 @@ public class Circle extends View {
     private final float x;
     private final float y;
     private final int r;
+    private final boolean player;
     private final Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     
-    public Circle(Context context, float x, float y, int r) {
+    public Circle(Context context, float x, float y, int r, boolean player) {
         super(context);
         //mPaint.setColor(0xFFFF0000);
-        mPaint.setColor(0xFFFFFFFF);
+        this.player=player;
+        	if (player==true)
+        	mPaint.setColor(0xFFFFFFFF);
+        	else
+        	mPaint.setColor(0xFFFF0000);
         this.x = x;
         this.y = y;
         this.r = r;
