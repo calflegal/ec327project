@@ -11,7 +11,7 @@ public class MainActivity extends Activity {
         System.loadLibrary("reversi");
     }
 	public native String getString();
-	
+	//hi from nicole
 	public void showToast(View v) {
 		Toast.makeText(MainActivity.this, getString(), Toast.LENGTH_LONG).show();
 		
