@@ -2,11 +2,11 @@ package com.ec327cassio.reversi;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 
 
@@ -20,11 +20,6 @@ public class MainActivity extends Activity {
         System.loadLibrary("reversi");
     }
 	public native String getString();
-	//hi from nicole
-	public void showToast(View v) {
-		Toast.makeText(MainActivity.this, getString(), Toast.LENGTH_LONG).show();
-		
-	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +28,16 @@ public class MainActivity extends Activity {
 		 RelativeLayout main = (RelativeLayout) findViewById(R.id.board_view);
 		 this.grid = new Grid(main.getContext());
 		 main.addView(this.grid);
+		 //setup initial board
+		 this.grid.select(4, 3);
+		 this.tryMoveAtIndex(4,3);
+		 this.grid.select(4, 4);
+		 this.tryMoveAtIndex(4,4);
+		 this.grid.select(3, 4);
+		 this.tryMoveAtIndex(3,4);
+		 this.grid.select(3, 3);
+		 this.tryMoveAtIndex(3,3);
+		 
 		 
 		
 		   this.grid.setOnTouchListener(new View.OnTouchListener() {
@@ -51,7 +56,7 @@ public class MainActivity extends Activity {
 	}
 	
 	public boolean gameisnotover() {
-		if (count < 64) {
+		if (count < 65) {
 			return true;
 		}
 		else return false;
@@ -59,16 +64,23 @@ public class MainActivity extends Activity {
 		
 	}
 	public void tryMoveAtIndex(int x,int y) {
+		Log.d("The value of the grid width", Float.toString(MainActivity.this.grid.tile_width));
 		//get board view
 		RelativeLayout gl = (RelativeLayout) findViewById(R.id.board_view);
 		//if move allowed, add this one to the array. (this line should call c, passing
-		// the index of the desired move.
-			//if it's an okay move, add to array of circles.
+		// the index of the desired move, like this:
+		//if (moveIsAllowed(x,y,gamestate_ints,count %2)
+			//if it's an okay move, add to array of circles. Also add it to ints array
 			gamestate_circles[x][y] = new Circle(gl.getContext(),
-					(grid.width/2)+grid.selX*(grid.width),(grid.height/2)+grid.selY*(grid.height),25,count%2);
-		//	pass un-updated array to C, then change colors as needed (for loop)
+					(grid.tile_width/2)+grid.selX*(grid.tile_width),(grid.tile_height/2)+grid.selY*(grid.tile_height),25,count%2);
+			//gamestate_ints[x][y] = blah blah
+		//	pass un-updated array to C, then change colors as needed:
+			//upadateBoard(gamestate_ints) (pass reference)??
+			//iterate over gamestate_circles, fixing colors and reprinting.
 		gl.addView(gamestate_circles[x][y]);
+		Log.d("The count of this move is", Integer.toString(count));
 		count++;
+		MainActivity.this.gameisnotover();
 		
 	}
 
