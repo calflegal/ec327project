@@ -83,7 +83,7 @@ public class MainActivity extends Activity {
 		RelativeLayout gl = (RelativeLayout) findViewById(R.id.board_view);
 		//if move allowed, add this one to the array. (this line should call c, passing
 		// the index of the desired move, like this:
-		//if (moveIsAllowed(x,y,gamestate_ints,count %2)
+		//if (moveIsAllowed(index x, index y,gamestate_ints,count %2)
 			//if it's an okay move, add to array of circles. Also add it to ints array
 			gamestate_circles[x][y] = new Circle(gl.getContext(),
 					(grid.tile_width/2)+grid.selX*(grid.tile_width),(grid.tile_height/2)+grid.selY*(grid.tile_height),25,count%2);
@@ -91,6 +91,7 @@ public class MainActivity extends Activity {
 		//	pass un-updated array to C, then change colors as needed:
 			//upadateBoard(gamestate_ints) (pass reference)??
 			//iterate over gamestate_circles, fixing colors and reprinting.
+			//note that this next line is wrong, instead iterate over array and print
 		gl.addView(gamestate_circles[x][y]);
 		Log.d("The count of this move is", Integer.toString(count));
 		count++;
