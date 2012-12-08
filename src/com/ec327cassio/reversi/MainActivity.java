@@ -68,7 +68,7 @@ public class MainActivity extends Activity {
 		//call the end screen!
 		Context context = getApplicationContext();
 		CharSequence text = "Game Over!";
-		int duration = Toast.LENGTH_LONG;
+		int duration = Toast.LENGTH_SHORT;
 
 		Toast toast = Toast.makeText(context, text, duration);
 		toast.show();
