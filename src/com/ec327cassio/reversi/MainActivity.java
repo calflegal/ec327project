@@ -1,5 +1,6 @@
 package com.ec327cassio.reversi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MotionEvent;
@@ -71,6 +72,11 @@ public class MainActivity extends Activity {
 		
 	}
 
+	public void reset(View view) {
+		finish();
+		startActivity(new Intent(MainActivity.this, MainActivity.class));
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
