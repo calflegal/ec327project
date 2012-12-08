@@ -11,5 +11,15 @@
         android:background="#FFFF0000" >
 
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/board_view"
+        android:layout_marginLeft="109dp"
+        android:onClick="reset"
+        android:text="@string/Reset" />
   
 </RelativeLayout>
