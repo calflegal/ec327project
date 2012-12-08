@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 
 
@@ -58,7 +60,7 @@ public class MainActivity extends Activity {
 	}
 	
 	public boolean gameisnotover() {
-		if (count < 65) {
+		if (count < 64) {
 			return true;
 		}
 		else 
@@ -66,10 +68,11 @@ public class MainActivity extends Activity {
 		//call the end screen!
 		Context context = getApplicationContext();
 		CharSequence text = "Game Over!";
-		int duration = Toast.LENGTH_SHORT;
+		int duration = Toast.LENGTH_LONG;
 
 		Toast toast = Toast.makeText(context, text, duration);
 		toast.show();
+		toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 0);
 		return false;
 		}
 		
