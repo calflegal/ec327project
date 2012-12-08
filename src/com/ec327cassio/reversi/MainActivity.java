@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	public Grid grid;
+	public int[][] gamestate_int = new int[8][8];
+	public Circle[][] gamestate_circles = new Circle[8][8];
 	
 	private int count = 0;
 	static {
@@ -37,23 +39,34 @@ public class MainActivity extends Activity {
 			    	if (e.getAction() == MotionEvent.ACTION_DOWN)  {
 			    		int x = (int) e.getX();
 			    		int y = (int) e.getY();
-			    		//RelativeLayout fl = (RelativeLayout) v;
-			    		//update the grid's index
+			    		//update the grid property for the space touched.
 			    		MainActivity.this.grid.selectAtTouch(x, y);
-			    		MainActivity.this.drawCircleAtIndex(grid.selX,grid.selY);
-			    		//MainActivity.this.grid.drawCircleAtCurrentSelected();
-			    		//fl.addView(new Circle(fl.getContext(), thegrid.selX,thegrid.selY,25,count%2));
-			    		//count++;
+			    		if (gameisnotover()) {MainActivity.this.tryMoveAtIndex(grid.selX,grid.selY);}
 			    		return true;
 			    	}
 			    	else return false;
 			    }
 			});	
 	}
-	public void drawCircleAtIndex(int x,int y) {
+	
+	public boolean gameisnotover() {
+		if (count < 64) {
+			return true;
+		}
+		else return false;
+		//call the end screen!
+		
+	}
+	public void tryMoveAtIndex(int x,int y) {
+		//get board view
 		RelativeLayout gl = (RelativeLayout) findViewById(R.id.board_view);
-		gl.addView(new Circle(gl.getContext(),
-				(grid.width/2)+grid.selX*(grid.width),(grid.height/2)+grid.selY*(grid.height),25,count%2));
+		//if move allowed, add this one to the array. (this line should call c, passing
+		// the index of the desired move.
+			//if it's an okay move, add to array of circles.
+			gamestate_circles[x][y] = new Circle(gl.getContext(),
+					(grid.width/2)+grid.selX*(grid.width),(grid.height/2)+grid.selY*(grid.height),25,count%2);
+		//	pass un-updated array to C, then change colors as needed (for loop)
+		gl.addView(gamestate_circles[x][y]);
 		count++;
 		
 	}

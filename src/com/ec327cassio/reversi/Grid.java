@@ -53,8 +53,6 @@ private void select(int x, int y) {
     getRect(selX, selY, selRect);
     //I dont know that we need to redraw it just by selection.
     //invalidate(selRect);
-    Log.d("value of y", Integer.toString(selY));
-    Log.d("value of x", Integer.toString(selX));
 }
 	
 @Override
