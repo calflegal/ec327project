@@ -30,7 +30,7 @@ private void getRect(int x, int y, Rect rect) {
 protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 	super.onSizeChanged(w, h, oldw, oldh);        
 	width = w / 8f;            // 1/8th of screen
-	height = h / 8f;
+	height = width;
 	getRect(selX, selY, selRect);    //to keep track of selection cursor
 	
  }

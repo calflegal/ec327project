@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
+	private int count = 0;
 	static {
         System.loadLibrary("reversi");
     }
@@ -36,7 +37,8 @@ public class MainActivity extends Activity {
 			    		float x = e.getX();
 			    		float y = e.getY();
 			    		FrameLayout fl = (FrameLayout) v;
-			    		fl.addView(new Circle(fl.getContext(), x,y,25,true));
+			    		fl.addView(new Circle(fl.getContext(), x,y,25,count%2));
+			    		count++;
 			    		return true;
 			    	}
 			    	else return false;
