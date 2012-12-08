@@ -1,5 +1,6 @@
 package com.ec327cassio.reversi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,8 +38,9 @@ public class MainActivity extends Activity {
 		 this.tryMoveAtIndex(3,4);
 		 this.grid.select(3, 3);
 		 this.tryMoveAtIndex(3,3);
-		 
-		 
+
+		 		 
+		
 		
 		   this.grid.setOnTouchListener(new View.OnTouchListener() {
 			    public boolean onTouch(View v, MotionEvent e) {
@@ -59,8 +61,17 @@ public class MainActivity extends Activity {
 		if (count < 65) {
 			return true;
 		}
-		else return false;
+		else 
+		{
 		//call the end screen!
+		Context context = getApplicationContext();
+		CharSequence text = "Game Over!";
+		int duration = Toast.LENGTH_SHORT;
+
+		Toast toast = Toast.makeText(context, text, duration);
+		toast.show();
+		return false;
+		}
 		
 	}
 	public void tryMoveAtIndex(int x,int y) {
