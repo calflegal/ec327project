@@ -26,7 +26,8 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		 GridLayout main = (GridLayout) findViewById(R.id.grid_view);
+		 FrameLayout main = (FrameLayout) findViewById(R.id.main_view);
+		 main.addView(new Grid(main.getContext()));
 		 
 		
 		   main.setOnTouchListener(new View.OnTouchListener() {
@@ -34,8 +35,8 @@ public class MainActivity extends Activity {
 			    	if (e.getAction() == MotionEvent.ACTION_DOWN)  {
 			    		float x = e.getX();
 			    		float y = e.getY();
-			    		GridLayout gridView = (GridLayout) v;
-			    		gridView.addView(new Circle(gridView.getContext(), x,y,25,true));
+			    		FrameLayout fl = (FrameLayout) v;
+			    		fl.addView(new Circle(fl.getContext(), x,y,25,true));
 			    		return true;
 			    	}
 			    	else return false;
