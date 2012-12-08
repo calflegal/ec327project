@@ -4,8 +4,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.GridLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
@@ -27,7 +26,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		 FrameLayout main = (FrameLayout) findViewById(R.id.main_view);
+		 RelativeLayout main = (RelativeLayout) findViewById(R.id.board_view);
 		 main.addView(new Grid(main.getContext()));
 		 
 		
@@ -36,7 +35,7 @@ public class MainActivity extends Activity {
 			    	if (e.getAction() == MotionEvent.ACTION_DOWN)  {
 			    		float x = e.getX();
 			    		float y = e.getY();
-			    		FrameLayout fl = (FrameLayout) v;
+			    		RelativeLayout fl = (RelativeLayout) v;
 			    		fl.addView(new Circle(fl.getContext(), x,y,25,count%2));
 			    		count++;
 			    		return true;
