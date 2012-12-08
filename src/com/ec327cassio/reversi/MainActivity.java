@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
+	public Grid grid;
 	
 	private int count = 0;
 	static {
@@ -27,22 +28,34 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		 RelativeLayout main = (RelativeLayout) findViewById(R.id.board_view);
-		 main.addView(new Grid(main.getContext()));
+		 this.grid = new Grid(main.getContext());
+		 main.addView(this.grid);
 		 
 		
-		   main.setOnTouchListener(new View.OnTouchListener() {
+		   this.grid.setOnTouchListener(new View.OnTouchListener() {
 			    public boolean onTouch(View v, MotionEvent e) {
 			    	if (e.getAction() == MotionEvent.ACTION_DOWN)  {
-			    		float x = e.getX();
-			    		float y = e.getY();
-			    		RelativeLayout fl = (RelativeLayout) v;
-			    		fl.addView(new Circle(fl.getContext(), x,y,25,count%2));
-			    		count++;
+			    		int x = (int) e.getX();
+			    		int y = (int) e.getY();
+			    		//RelativeLayout fl = (RelativeLayout) v;
+			    		//update the grid's index
+			    		MainActivity.this.grid.selectAtTouch(x, y);
+			    		MainActivity.this.drawCircleAtIndex(grid.selX,grid.selY);
+			    		//MainActivity.this.grid.drawCircleAtCurrentSelected();
+			    		//fl.addView(new Circle(fl.getContext(), thegrid.selX,thegrid.selY,25,count%2));
+			    		//count++;
 			    		return true;
 			    	}
 			    	else return false;
 			    }
 			});	
+	}
+	public void drawCircleAtIndex(int x,int y) {
+		RelativeLayout gl = (RelativeLayout) findViewById(R.id.board_view);
+		gl.addView(new Circle(gl.getContext(),
+				(grid.width/2)+grid.selX*(grid.width),(grid.height/2)+grid.selY*(grid.height),25,count%2));
+		count++;
+		
 	}
 
 	@Override

@@ -2,8 +2,6 @@ package com.ec327cassio.reversi;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Rect;
-import android.util.Log;
 import android.view.View;
 
 
@@ -18,7 +16,7 @@ public class Circle extends View {
     public Circle(Context context, float x, float y, int r, int player) {
         super(context);
         this.player=player;
-        	if (player==1)
+        	if (this.player==1)
         	mPaint.setColor(0xFFFFFFFF);
         	else
         	mPaint.setColor(0xff000000); 
