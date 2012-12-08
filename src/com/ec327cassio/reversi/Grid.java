@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.View;
-
+import android.widget.RelativeLayout;
 
 public class Grid extends View{
     private float width;    // width of one tile
@@ -50,7 +50,7 @@ super.onDraw(canvas);
     hilite.setColor(0xFFFFFFFF);
 
     // Draw the minor grid lines
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 9; i++) {
         canvas.drawLine(0, i * height, getWidth(), i * height, hilite);
         canvas.drawLine(0, i * height + 1, getWidth(), i * height + 1, hilite);
         canvas.drawLine(i * width, 0, i * width, getHeight(), hilite);

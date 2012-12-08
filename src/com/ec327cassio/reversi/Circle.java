@@ -17,7 +17,6 @@ public class Circle extends View {
     
     public Circle(Context context, float x, float y, int r, int player) {
         super(context);
-        //mPaint.setColor(0xFFFF0000);
         this.player=player;
         	if (player==1)
         	mPaint.setColor(0xFFFFFFFF);
