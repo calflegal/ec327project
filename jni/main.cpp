@@ -5,11 +5,17 @@
 const char * CPPgetString(){
 	return "it worked!";
 }
-
+//include something for if player is blocked.
 extern "C"{
 
-	jstring Java_com_ec327cassio_reversi_MainActivity_getString(JNIEnv * env, jobject obj)
+	jboolean Java_com_ec327cassio_reversi_MainActivity_getString(JNIEnv * env, jobject board[8][8])
 	{
 		return env->NewStringUTF(CPPgetString());
 	}
 }
+
+
+
+
+
+
