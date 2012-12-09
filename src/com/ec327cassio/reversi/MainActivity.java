@@ -16,34 +16,45 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
-
+//defines the (only) activity
 public class MainActivity extends Activity {
+	
+	//member variables
+	//The grid object
 	public Grid grid;
+	//keeping track of gamestate in two synchronized arrays
 	public int[][] gamestate_int = new int[8][8];
 	public Circle[][] gamestate_circles = new Circle[8][8];
 	 
 	//for the shake sensor
 	private SensorManager mSensorManager;
-	  private float mAccel; // acceleration apart from gravity
-	  private float mAccelCurrent; // current acceleration including gravity
-	  private float mAccelLast; // last acceleration including gravity
-	  
-	  
-	private int count = 0;
+	private float mAccel; // acceleration apart from gravity
+	private float mAccelCurrent; // current acceleration including gravity
+	private float mAccelLast; // last acceleration including gravity
+	private int movecount = 0;
+	//link to the compiled C
 	static {
         System.loadLibrary("reversi");
     }
+	
+	//declare C methods (defined in cpp files)
 	public native String getString();
 
 	@Override
+	//called when activity started
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		//set main to be the grid
 		 RelativeLayout main = (RelativeLayout) findViewById(R.id.board_view);
-		 this.grid = new Grid(main.getContext());
+		 //set member variable
+		 this.grid = new Grid(main.getContext(),  findViewById(R.id.board_view).getLayoutParams().width);
+		 //add the grid to screen 
 		 main.addView(this.grid);
 		 //setup initial board
+		 //updates where I would like to place it
 		 this.grid.select(4, 3);
+		 //actually tries to make the 
 		 this.tryMoveAtIndex(4,3);
 		 this.grid.select(4, 4);
 		 this.tryMoveAtIndex(4,4);
@@ -52,13 +63,14 @@ public class MainActivity extends Activity {
 		 this.grid.select(3, 3);
 		 this.tryMoveAtIndex(3,3);
 
-		 		 
+		 //set the member variables for the shaking sensor.		 
 		 mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		    mSensorManager.registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
 		    mAccel = 0.00f;
 		    mAccelCurrent = SensorManager.GRAVITY_EARTH;
 		    mAccelLast = SensorManager.GRAVITY_EARTH;		
 		
+		    //bind a touch listener to grid
 		   this.grid.setOnTouchListener(new View.OnTouchListener() {
 			    public boolean onTouch(View v, MotionEvent e) {
 			    	if (e.getAction() == MotionEvent.ACTION_DOWN)  {
@@ -78,7 +90,7 @@ public class MainActivity extends Activity {
 	}
 	
 	public boolean gameisnotover() {
-		if (count < 64) {
+		if (movecount < 64) {
 			return true;
 		}
 		else 
@@ -104,15 +116,15 @@ public class MainActivity extends Activity {
 		//if (moveIsAllowed(index x, index y,gamestate_ints,count %2)
 			//if it's an okay move, add to array of circles. Also add it to ints array
 			gamestate_circles[x][y] = new Circle(gl.getContext(),
-					(grid.tile_width/2)+grid.selX*(grid.tile_width),(grid.tile_height/2)+grid.selY*(grid.tile_height),25,count%2);
+					(grid.tile_width/2)+grid.selX*(grid.tile_width),(grid.tile_height/2)+grid.selY*(grid.tile_height),25,movecount%2);
 			//gamestate_ints[x][y] = blah blah
 		//	pass un-updated array to C, then change colors as needed:
 			//upadateBoard(gamestate_ints) (pass reference)??
 			//iterate over gamestate_circles, fixing colors and reprinting.
 			//note that this next line is wrong, instead iterate over array and print
 		gl.addView(gamestate_circles[x][y]);
-		Log.d("The count of this move is", Integer.toString(count));
-		count++;
+		Log.d("The count of this move is", Integer.toString(movecount));
+		movecount++;
 		MainActivity.this.gameisnotover();
 		
 	}
@@ -130,13 +142,13 @@ public class MainActivity extends Activity {
 	}
 
 
-
+		//set a sensor listener
 	  private final SensorEventListener mSensorListener = new SensorEventListener() {
-
 	    public void onSensorChanged(SensorEvent se) {
 	      float x = se.values[0];
 	      float y = se.values[1];
 	      float z = se.values[2];
+	      //sets member line
 	      mAccelLast = mAccelCurrent;
 	      mAccelCurrent = (float) Math.sqrt((double) (x*x + y*y + z*z));
 	      float delta = mAccelCurrent - mAccelLast;
