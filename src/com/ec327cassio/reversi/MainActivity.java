@@ -83,7 +83,7 @@ public class MainActivity extends Activity {
 		}
 		else 
 		{
-		//call the end screen!
+		//TOAST!
 		Context context = getApplicationContext();
 		CharSequence text = "Game Over!";
 		int duration = Toast.LENGTH_SHORT;
@@ -142,7 +142,7 @@ public class MainActivity extends Activity {
 	      mAccel = mAccel * 0.9f + delta; // perform low-cut filter
 	      
 	      //detect shake and reset
-	      if (mAccel > 2)
+	      if (mAccel > 4)
 	      {
 	    	  MainActivity.this.reset(findViewById(R.id.main_view));
 	      }
