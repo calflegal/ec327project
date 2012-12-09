@@ -21,7 +21,14 @@ public class MainActivity extends Activity {
 	public Grid grid;
 	public int[][] gamestate_int = new int[8][8];
 	public Circle[][] gamestate_circles = new Circle[8][8];
-	
+	 
+	//for the shake sensor
+	private SensorManager mSensorManager;
+	  private float mAccel; // acceleration apart from gravity
+	  private float mAccelCurrent; // current acceleration including gravity
+	  private float mAccelLast; // last acceleration including gravity
+	  
+	  
 	private int count = 0;
 	static {
         System.loadLibrary("reversi");
@@ -122,10 +129,7 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
-	 private SensorManager mSensorManager;
-	  private float mAccel; // acceleration apart from gravity
-	  private float mAccelCurrent; // current acceleration including gravity
-	  private float mAccelLast; // last acceleration including gravity
+
 
 	  private final SensorEventListener mSensorListener = new SensorEventListener() {
 
@@ -137,6 +141,12 @@ public class MainActivity extends Activity {
 	      mAccelCurrent = (float) Math.sqrt((double) (x*x + y*y + z*z));
 	      float delta = mAccelCurrent - mAccelLast;
 	      mAccel = mAccel * 0.9f + delta; // perform low-cut filter
+	      
+	      //detect shake and reset
+	      if (mAccel > 2)
+	      {
+	    	  MainActivity.this.reset(findViewById(R.id.main_view));
+	      }
 	    }
 
 	    public void onAccuracyChanged(Sensor sensor, int accuracy) {
