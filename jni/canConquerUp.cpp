@@ -8,7 +8,7 @@ bool canConquerUp(int c, int r,int p, int** board){
      // impossible to conquer if space is less than 2
      if (r > 1) {
 
-             // impossible enclose upwards if adjacent upwards chip is not
+             // impossible to enclose upwards if adjacent upwards chip is not
              // opponent
              if (board[c][r-1] == op(p)) {
 

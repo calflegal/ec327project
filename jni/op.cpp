@@ -16,7 +16,7 @@ int op(int p){
 int op(int p){
 	if(p==1)
 	{	return 2;	}
-		else if (p == 0)
+		else if (p == 2)
 	{	return 1;	}
 
 }

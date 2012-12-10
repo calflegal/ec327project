@@ -1,14 +1,5 @@
-/*
-#ifndef FIRST_H
-#define FIRST_H
-
-extern int first(int  x, int  y);
-
-#endif // FIRST_H
- */
-
-//#ifndef GAMELOGIC_H
-//#define GAMELOGIC_H
+#ifndef GAMELOGIC_H
+#define GAMELOGIC_H
 
 
 
@@ -38,4 +29,4 @@ int Conquer(int c, int r, int x, int y, int p,int** board);
 
 
 
-//#endif //gamelogic
+#endif //gamelogic

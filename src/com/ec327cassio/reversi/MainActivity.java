@@ -1,4 +1,5 @@
 package com.ec327cassio.reversi;
+import android.R.bool;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -32,6 +33,7 @@ public class MainActivity extends Activity {
 	private float mAccelCurrent; // current acceleration including gravity
 	private float mAccelLast; // last acceleration including gravity
 	private int movecount = 0;
+//=-------------------------------------------------------------------------	
 	//link to the compiled C
 	static {
         System.loadLibrary("reversi");
@@ -39,7 +41,12 @@ public class MainActivity extends Activity {
 	
 	//declare C methods (defined in cpp files)
 	public native String getString();
-
+	
+	public native bool isValid(int x, int y, int**board, int player);
+	
+	public native void FixBoard(int c, int r,  int** board, int p);
+//=------------------------------------------------------------------------
+	
 	@Override
 	//called when activity started
 	protected void onCreate(Bundle savedInstanceState) {

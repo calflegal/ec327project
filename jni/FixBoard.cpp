@@ -1,7 +1,6 @@
 #include <jni.h>
 #include <gamestate.h>
 
-extern "C"{
 
 void fixBoard(int c, int r,  int** board, int p)
 {
@@ -15,7 +14,7 @@ if(canConquerLeft(  c,  r, p, board ))
 {	Conquer( c,  r, -1, 0,  board, p);	}
 
 if(canConquerRight(  c,  r, p, board ))
-{	Conquer( c,  r, -1, 0,  board, p);	}
+{	Conquer( c,  r, 1, 0,  board, p);	}
 
 if(canConquerDL(  c,  r, p, board ))
 {	Conquer( c,  r, -1, 1,  board, p);	}
