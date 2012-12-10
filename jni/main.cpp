@@ -331,7 +331,7 @@ Java_com_ec327cassio_reversi_MainActivity_isValid(JNIEnv * env, jobject obj, jin
 	jint y, jobjectArray board, jint player)
 	{
 		int len1 = 8;
-				jobjectArray the_c_board;
+				int** the_c_board;
 				the_c_board = new int*[len1];
 				//populate
 				for (int i =0; i < 8; i++) {
@@ -348,13 +348,12 @@ Java_com_ec327cassio_reversi_MainActivity_isValid(JNIEnv * env, jobject obj, jin
 
 
 				//do above but backwards and setObjectArrayElement
-				for(int i =0; i < 8; i++) {
-					jobject row = (jobject)env->SetObjectArrayElement(*(board), i, *(row));
-					jobject *element = env->SetObjectArrayElement(board, 8, *(element));
-//					board[i]	=	new int[len];
-					for(int j = 0; j < 8; j++)
+				for(int m =0; m < 8; m++) {
+					jobjectArray row = (jobjectArray)env->GetObjectArrayElement(board,m);
+//					setting the array
+					for(int n = 0; n < 8; n++)
 					{
-					board[i][j] = element[j];
+					env->SetObjectArrayElement(row,(jsize) n,(jobject)the_c_board[m][n]);
 					}
 				}
 
