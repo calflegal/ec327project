@@ -59,6 +59,13 @@ public class MainActivity extends Activity {
 		 this.grid = new Grid(main.getContext(),  findViewById(R.id.board_view).getLayoutParams().width);
 		 //add the grid to screen 
 		 main.addView(this.grid);
+		 //initialize gamestate_int to be an "empty" board
+		 for (int i=0; i <8; i++ ) {
+			 for (int j=0; j<8; j++) {
+				 this.gamestate_int[i][j] = 2;
+			 }
+			 
+		 }
 		 //setup initial board
 		 //updates where I would like to place it
 		 this.grid.select(4, 3);
@@ -116,21 +123,20 @@ public class MainActivity extends Activity {
 		
 	}
 	public void tryMoveAtIndex(int x,int y) {
-		Log.d("The value of the grid width", Float.toString(MainActivity.this.grid.tile_width));
 		//get board view
 		RelativeLayout gl = (RelativeLayout) findViewById(R.id.board_view);
 		//if move allowed, add this one to the array. (this line should call c, passing
 		// the index of the desired move, like this:
 		//if (moveIsAllowed(index x, index y,gamestate_ints,count %2)
 			//if it's an okay move, add to array of circles. Also add it to ints array
-		
+		Log.d("The value of isValid is", Boolean.toString(isValid(x, y, gamestate_int, movecount %2)) );
 		if(isValid(x, y, gamestate_int, movecount %2))
-		{			
+		{	//make move.		
 			gamestate_int[x][y] = movecount %2;
 			FixBoard(x, y, gamestate_int, movecount %2);
 			gamestate_circles[x][y] = new Circle(gl.getContext(),
 					(grid.tile_width/2)+grid.selX*(grid.tile_width),(grid.tile_height/2)+grid.selY*(grid.tile_height),25,movecount%2);
-			gamestate_int[x][y] = movecount%2;
+			
 			
 		}
 		
