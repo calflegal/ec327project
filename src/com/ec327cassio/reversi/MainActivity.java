@@ -3,6 +3,7 @@ import android.R.bool;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -48,6 +49,29 @@ public class MainActivity extends Activity {
 	public native void FixBoard(int x, int y,  int  board[][], int player);
 //=------------------------------------------------------------------------
 	
+
+	
+	public void setupBoard() {
+		gamestate_int[4][3] = 0;
+		redrawBoardFromIntArray();
+		movecount++;
+		
+		gamestate_int[4][4] = 1;
+		redrawBoardFromIntArray();
+		movecount++;
+		
+		MainActivity.this.grid.select(3, 4);
+		gamestate_int[3][4] = 0;
+		redrawBoardFromIntArray();
+		movecount++;
+		
+		MainActivity.this.grid.select(3, 3);
+		gamestate_int[3][3] = 1;
+		redrawBoardFromIntArray();
+		movecount++;
+		
+	}
+	
 	@Override
 	//called when activity started
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,17 +90,10 @@ public class MainActivity extends Activity {
 			 }
 			 
 		 }
-		 //setup initial board
-		 //updates where I would like to place it
-		 this.grid.select(4, 3);
-		 //actually tries to make the 
-		 this.tryMoveAtIndex(4,3);
-		 this.grid.select(4, 4);
-		 this.tryMoveAtIndex(4,4);
-		 this.grid.select(3, 4);
-		 this.tryMoveAtIndex(3,4);
-		 this.grid.select(3, 3);
-		 this.tryMoveAtIndex(3,3);
+		 
+		 
+		 
+		setupBoard();
 
 		 //set the member variables for the shaking sensor.		 
 		 mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -122,22 +139,53 @@ public class MainActivity extends Activity {
 		}
 		
 	}
+	public void redrawBoardFromIntArray () {
+		RelativeLayout gl = (RelativeLayout) findViewById(R.id.board_view);
+		for (int i=0; i <8; i++) {
+			for (int j=0; j<8; j++) {
+				if ((MainActivity.this.gamestate_int[i][j] == 0) //if it should be black but its null
+						&& (MainActivity.this.gamestate_circles[i][j] == null) ) {
+					MainActivity.this.grid.select(i,j);
+					gamestate_circles[i][j] = new Circle(gl.getContext(),
+							(grid.tile_width/2)+grid.selX*(grid.tile_width),(grid.tile_height/2)+grid.selY*(grid.tile_height),25,movecount%2);
+					gl.addView(gamestate_circles[i][j]);
+						
+				}
+				else if ((MainActivity.this.gamestate_int[i][j] == 1) //if it should be white but its null
+						&& (MainActivity.this.gamestate_circles[i][j] == null) ) {
+					MainActivity.this.grid.select(i,j);
+					gamestate_circles[i][j] = new Circle(gl.getContext(),
+							(grid.tile_width/2)+grid.selX*(grid.tile_width),(grid.tile_height/2)+grid.selY*(grid.tile_height),25,movecount%2);
+					gl.addView(gamestate_circles[i][j]);
+						
+				}
+				else if ((MainActivity.this.gamestate_int[i][j] == 0) //if it should be black, but its white
+						&& (MainActivity.this.gamestate_circles[i][j].mPaint.getColor() != Color.BLACK) ) {
+					MainActivity.this.gamestate_circles[i][j].mPaint.setColor(Color.BLACK);
+					MainActivity.this.gamestate_circles[i][j].invalidate();
+				}
+				else if ((MainActivity.this.gamestate_int[i][j] == 1) //if it should be white but its black
+						&& (MainActivity.this.gamestate_circles[i][j].mPaint.getColor() != Color.WHITE) ) {
+					MainActivity.this.gamestate_circles[i][j].mPaint.setColor(Color.WHITE);
+					MainActivity.this.gamestate_circles[i][j].invalidate(); 
+			
+				}
+			}
+		}
+	}
+	
 	public void tryMoveAtIndex(int x,int y) {
 		//get board view
-		RelativeLayout gl = (RelativeLayout) findViewById(R.id.board_view);
-		//if move allowed, add this one to the array. (this line should call c, passing
-		// the index of the desired move, like this:
-		//if (moveIsAllowed(index x, index y,gamestate_ints,count %2)
-			//if it's an okay move, add to array of circles. Also add it to ints array
+		// RelativeLayout gl = (RelativeLayout) findViewById(R.id.board_view);
 		Log.d("The value of isValid is", Boolean.toString(isValid(x, y, gamestate_int, movecount %2)) );
 		if(isValid(x, y, gamestate_int, movecount %2))
 		{	//make move.		
 			gamestate_int[x][y] = movecount %2;
+			
 			//FixBoard(x, y, gamestate_int, movecount %2);
-			gamestate_circles[x][y] = new Circle(gl.getContext(),
-					(grid.tile_width/2)+grid.selX*(grid.tile_width),(grid.tile_height/2)+grid.selY*(grid.tile_height),25,movecount%2);
-			
-			
+			redrawBoardFromIntArray();
+			movecount++;
+			MainActivity.this.gameisnotover();
 		}
 		
 		else
@@ -145,24 +193,11 @@ public class MainActivity extends Activity {
 			Context context = getApplicationContext();
 			CharSequence text = "Invalid Move!";
 			int duration = Toast.LENGTH_SHORT;
-
 			Toast toast = Toast.makeText(context, text, duration);
 			toast.show();
 			toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 0);
 		}
-
-
-		//	pass un-updated array to C, then change colors as needed:
-			//updateBoard(gamestate_ints) (pass reference)??
-			//iterate over gamestate_circles, fixing colors and reprinting.
-			//note that this next line is wrong, instead iterate over array and print
-			
-			
-			
-			
-		gl.addView(gamestate_circles[x][y]);
-		movecount++;
-		MainActivity.this.gameisnotover();
+		
 		
 	}
 
