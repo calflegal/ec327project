@@ -12,9 +12,7 @@ bool canConquerUp(int c, int r,int p, int** board){
              // opponent
              if (board[c][r-1] == op(p)) {
 
-                     int value = checkLine(
-                                     op(p), c, (r -1) , /*Direction.X.NONE*/0,
-                                     -1/*Direction.Y.UP*/, board);
+                     int value = checkLine( op(p), c, (r -1) ,0,-1, board);
                      enclosing = value;
 
              }

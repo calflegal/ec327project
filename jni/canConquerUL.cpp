@@ -2,19 +2,21 @@
 #include "gamelogic.h"
 
 
-bool canConquerDown(int c, int r,int p, int** board){
+bool canConquerUL(int c, int r,int p, int** board){
 	 bool enclosing = false;
      // impossible to conquer if space is less than 2
-     if (r <6 ) {
+     if (c > 1 && r > 1 ) {
 
              // impossible enclose upwards if adjacent upwards chip is not
              // opponent
-             if (board[c][r+1] == op(p)) {
+             if (board[c-1][r-1] == op(p)) {
 
-                     int value = checkLine(op(p), c, (r+1) , 0, 1, board);
+                     int value = checkLine(op(p), (c-1), (r-1) ,-1, -1, board);
                      enclosing = value ==p;
 
              }
      }
      return enclosing;
 }
+
+

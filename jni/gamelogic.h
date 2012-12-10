@@ -1,6 +1,4 @@
 /*
-
-
 #ifndef FIRST_H
 #define FIRST_H
 
@@ -9,25 +7,25 @@ extern int first(int  x, int  y);
 #endif // FIRST_H
  */
 
-#ifndef GAMELOGIC_H
-#define GAMELOGIC_H
+//#ifndef GAMELOGIC_H
+//#define GAMELOGIC_H
 
 
-extern int  op(int player);
-extern int checkLine(int player, int x, int y, int directionX, int directionY);
+ int  op(int player);
+ int checkLine(int player, int x, int y, int directionX, int directionY,int** board);
 
 
-extern bool isValid(int x, int y, int board[8][8], int player);
-extern bool isEmpty(int board[8][8]);
+ bool isValid(int x, int y, int**board, int player);
+ bool isEmpty(int c, int r,int** board);
 
-extern bool canConquerUp(int x, int y, int player);
+ bool canConquerUp(int x, int y, int player,int** board);
 
+void fixBoard(int c, int r,  int** board, int p);
 
-extern bool IsMoveAllowed(int x, int y, int board[8][8], int player);
-
-
-
+int Conquer(int c, int r, int x, int y, int p,int** board);
 
 
 
-#endif //gamelogic
+
+
+//#endif //gamelogic
