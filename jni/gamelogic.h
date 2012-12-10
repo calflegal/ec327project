@@ -13,18 +13,20 @@ extern int first(int  x, int  y);
 #define GAMELOGIC_H
 
 
-extern int  op(int player);
-extern int checkLine(int player, int x, int y, int directionX, int directionY);
 
 
-extern bool isValid(int x, int y, int board[8][8], int player);
-extern bool isEmpty(int board[8][8]);
-
-extern bool canConquerUp(int x, int y, int player);
+int  op(int player);
+int checkLine(int player, int x, int y, int directionX, int directionY,int** board);
 
 
-extern bool IsMoveAllowed(int x, int y, int board[8][8], int player);
+bool isValid(int x, int y, int**board, int player);
+bool isEmpty(int c, int r,int** board);
 
+bool canConquerUp(int x, int y, int player,int** board);
+
+void fixBoard(int c, int r,  int** board, int p);
+
+int Conquer(int c, int r, int x, int y, int p,int** board);
 
 
 
