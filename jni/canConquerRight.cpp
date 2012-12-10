@@ -3,7 +3,7 @@
 
 
         bool canConquerRight(int c, int r,int p, int** board){
-        	 bool enclosing = false;
+        	 bool check = false;
              // impossible to conquer if space is less than 2
              if (c < 6 ) {
 
@@ -12,10 +12,10 @@
                      if (board[c+1][r] == op(p)) {
 
                              int value = checkLine(op(p), (c+1), r ,1,0, board);
-                             enclosing = value == p;
+                             check = value == p;
 
                      }
              }
-             return enclosing;
+             return check;
         };
 

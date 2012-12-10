@@ -4,7 +4,7 @@
 
 
 bool canConquerUR(int c, int r,int p, int** board){
-	 bool enclosing = false;
+	 bool check = false;
      // impossible to conquer if space is less than 2
      if (c < 6 && r > 1 ) {
 
@@ -13,11 +13,11 @@ bool canConquerUR(int c, int r,int p, int** board){
              if (board[c+1][r-1] == op(p)) {
 
                      int value = checkLine(op(p), (c+1), (r-1) ,1, -1, board);
-                     enclosing = value ==p;
+                     check = value ==p;
 
              }
      }
-     return enclosing;
+     return check;
 };
 
 

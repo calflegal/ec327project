@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
 	//apparently Java doesn't know what to do with pointers
 	public native boolean isValid(int x, int y, int board[][], int player);
 	
-//	public native void FixBoard(int c, int r,  int  board[][], int p);
+//	public native void FixBoard(int x, int y,  int  board[][], int player);
 //=------------------------------------------------------------------------
 	
 	@Override
@@ -127,10 +127,10 @@ public class MainActivity extends Activity {
 		if(isValid(x, y, gamestate_int, movecount %2))
 		{			
 			gamestate_int[x][y] = movecount %2;
-	//		FixBoard(x, y, gamestate_int, movecount %2);					
+	//		FixBoard(x, y, gamestate_int, movecount %2);
 		}
 		
-/*		else
+		else
 		{
 			Context context = getApplicationContext();
 			CharSequence text = "Invalid Move!";
@@ -140,10 +140,10 @@ public class MainActivity extends Activity {
 			toast.show();
 			toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 0);
 		}
-*/
+
 			gamestate_circles[x][y] = new Circle(gl.getContext(),
 					(grid.tile_width/2)+grid.selX*(grid.tile_width),(grid.tile_height/2)+grid.selY*(grid.tile_height),25,movecount%2);
-			//gamestate_ints[x][y] = blah blah
+			gamestate_int[x][y] = movecount%2;
 		//	pass un-updated array to C, then change colors as needed:
 			//updateBoard(gamestate_ints) (pass reference)??
 			//iterate over gamestate_circles, fixing colors and reprinting.

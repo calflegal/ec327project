@@ -3,7 +3,7 @@
 
 
 bool canConquerDL(int c, int r,int p, int** board){
-	 bool enclosing = false;
+	 bool check = false;
      // impossible to conquer if space is less than 2
      if (c > 1 && r < 6 ) {
 
@@ -13,9 +13,9 @@ bool canConquerDL(int c, int r,int p, int** board){
 
                      int value = checkLine(op(p), (c-1), (r+1) , -1, +1, board);
 
-                     enclosing = value ==p;
+                     check = value ==p;
 
              }
      }
-     return enclosing;
+     return check;
 };
