@@ -90,10 +90,12 @@ public class MainActivity extends Activity {
 			 }
 			 
 		 }
+
 		 
 		 
 		 
 		setupBoard();
+
 
 		 //set the member variables for the shaking sensor.		 
 		 mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -181,11 +183,13 @@ public class MainActivity extends Activity {
 		if(isValid(x, y, gamestate_int, movecount %2))
 		{	//make move.		
 			gamestate_int[x][y] = movecount %2;
+
 			
 			//FixBoard(x, y, gamestate_int, movecount %2);
 			redrawBoardFromIntArray();
 			movecount++;
 			MainActivity.this.gameisnotover();
+
 		}
 		
 		else
@@ -197,7 +201,7 @@ public class MainActivity extends Activity {
 			toast.show();
 			toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 0);
 		}
-		
+
 		
 	}
 

@@ -253,7 +253,7 @@ int Conquer(int x, int y, int directionX, int directionY, int** board,int player
         }
 //=======================================================================================
 
-void fixBoard(int x, int y,  int** board, int player)
+void C_fixBoard(int x, int y,  int** board, int player)
 {
 if(canConquerUp(  x,  y, player, board ))
 {	Conquer( x,  y, 0, -1,  board, player);	}
@@ -291,7 +291,7 @@ extern "C"{
 
 
 	JNIEXPORT jboolean JNICALL
-Java_com_ec327cassio_reversi_MainActivity_isValid(JNIEnv * env, jobject, jint x,
+Java_com_ec327cassio_reversi_MainActivity_isValid(JNIEnv * env, jobject obj, jint x,
 	jint y, jobjectArray board, jint player)
 	{
 		int len1 = 8;
@@ -318,11 +318,51 @@ Java_com_ec327cassio_reversi_MainActivity_isValid(JNIEnv * env, jobject, jint x,
 		return (jboolean) result;
 
 	}
-
+/*
+	jobjectArray a = env->NewObjectArray( n, jstring_class, NULL );
+	for ( int i = 0; i < n; ++i ) {
+	    jstring js =  some function that returns a jstring
+	    env->SetObjectArrayElement( a, i, js );
+	    env->DeleteLocalRef( js );    // Should this be here?
+	}
+*/
 	JNIEXPORT void JNICALL
-    Java_com_ec327cassio_reversi_MainActivity_FixBoard(JNIEnv * env, jobject, jint x,
-	jint y, jint board[8][8], jint player)
+    Java_com_ec327cassio_reversi_MainActivity_FixBoard(JNIEnv * env, jobject obj, jint x,
+	jint y, jobjectArray board, jint player)
 	{
+		int len1 = 8;
+				int** the_c_board;
+				the_c_board = new int*[len1];
+				//populate
+				for (int i =0; i < 8; i++) {
+					jintArray row = (jintArray)env->GetObjectArrayElement(board,i);
+					jint *element = env->GetIntArrayElements(row,0);
+					//allocate the sub-array for the row
+					the_c_board[i] = new int[len1];
+					for (int j=0; j<8; j++) {
+						the_c_board[i][j] = element[j];
+					}
+				}
+
+				C_fixBoard( (int) x, (int) y, the_c_board, (int)player );
+
+
+				//do above but backwards and setObjectArrayElement
+				for(int m =0; m < 8; m++) {
+					jobjectArray row = (jobjectArray)env->GetObjectArrayElement(board,m);
+//					setting the array
+					for(int n = 0; n < 8; n++)
+					{
+					env->SetObjectArrayElement(row,(jsize) n,(jobject)the_c_board[m][n]);
+					}
+				}
+
+
+				//properly delete the array before returning bool
+				for (int k=0; k<8; k++) {
+					delete [] the_c_board[k];
+				}
+				delete [] the_c_board;
 
 
 	}
