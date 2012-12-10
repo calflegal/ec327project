@@ -8,7 +8,7 @@
 //	return "it worked!";
 //};
 //=======================================================================================
-bool isValid( int x, int y, int** board, int player) {
+bool CisValid( int x, int y, int** board, int player) {
              bool Valid;
 
              Valid = isEmpty(x,y,board) && ( (canConquerUp(x, y, player, board))	||
@@ -297,9 +297,9 @@ extern "C"{
 
 	JNIEXPORT jboolean JNICALL
 	Java_com_ec327cassio_reversi_MainActivity_isValid(JNIEnv * env, jobject, jint x,
-	jint y, jint  board[8][8], jint player)
+	jint y, jint **  board, jint player)
 	{
-		return (bool) isValid;
+		return (bool) CisValid(x,y,board,player);
 
 	}
 
