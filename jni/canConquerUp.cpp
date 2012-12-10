@@ -18,4 +18,4 @@ bool canConquerUp(int c, int r,int p, int** board){
              }
      }
      return enclosing;
-}
+};

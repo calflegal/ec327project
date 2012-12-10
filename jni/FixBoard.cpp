@@ -27,7 +27,7 @@ if(canConquerUL(  c,  r, p, board ))
 
 if(canConquerUR(  c,  r, p, board ))
 {	Conquer( c,  r, 1, -1,  board, p);	}
-}
+};
 
 
 

@@ -18,4 +18,4 @@ bool canConquerDL(int c, int r,int p, int** board){
              }
      }
      return enclosing;
-}
+};

@@ -15,7 +15,7 @@ int checkLine(int p, int initialColumn,
   int x = initialColumn;
     int y = initialRow;
 
-cout << "x=" << x << "y="<<y <<endl;
+
    while (!resolved) {
 
  x += directionX;
@@ -32,7 +32,6 @@ cout << "x=" << x << "y="<<y <<endl;
   resolved = true;
   }
   }
-cout << "cline(conquer ends at):" <<x <<"|"<< y << endl;
  return cline;
-  }
+  };
   

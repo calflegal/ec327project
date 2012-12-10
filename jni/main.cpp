@@ -2,32 +2,7 @@
 #include "gamelogic.h"
 //put functions here
 
-extern "C"{
 
-	jboolean Java_com_ec327cassio_reversi_MainActivity_getString(JNIEnv * env, jobject board[8][8])
-	{
-		return env->NewStringUTF(CPPgetString());
-	}
-
-
-//	JNIEXPORT jboolean JNICALL
-	jboolean Java_com_ec327cassio_reversi_MainActivity_isValid(JNIEnv * env, jobject, jint x,
-	jint y, jint ** board, jint player)
-	{
-		return (bool) canPut;
-
-	}
-
-//	JNIEXPORT void JNICALL
-	jvoid Java_com_ec327cassio_reversi_MainActivity_FixBoard(JNIEnv * env, jobject, jint c,
-	jint r, jint ** board, jint p)
-	{
-		return env -> board;
-
-	}
-
-
-}
 //=======================================================================================
 const char * CPPgetString(){
 	return "it worked!";
@@ -48,16 +23,16 @@ bool isValid( int c, int r, int** board, int p) {
 
              return canPut;
 
-        }
+        };
 
 //=======================================================================================
 bool isEmpty(int c,int r,int** board){
 
-             if(board[c][r] == 0)	//val 2 = empty
+             if(board[c][r] == 2)	//val 2 = empty
              { 	 return true;				}
              else
              { 	 return false;}
-}
+};
 //=======================================================================================
 int op(int p){
 	if(p==1)
@@ -65,7 +40,7 @@ int op(int p){
 		else if (p == 0)
 	{		return 1;	}
 
-}
+};
 
 //=======================================================================================
 int checkLine(int p, int initialColumn,
@@ -78,10 +53,7 @@ int checkLine(int p, int initialColumn,
 
   int x = initialColumn;
     int y = initialRow;
-
-cout << "x=" << x << "y="<<y <<endl;
    while (!resolved) {
-
  x += directionX;
     y += directionY;
    // if we are inside the bounds of the board game
@@ -96,9 +68,9 @@ cout << "x=" << x << "y="<<y <<endl;
   resolved = true;
   }
   }
-cout << "cline(conquer ends at):" <<x <<"|"<< y << endl;
+
  return cline;
-  }
+  };
 //=======================================================================================
 
 bool canConquerDL(int c, int r,int p, int** board){
@@ -117,7 +89,7 @@ bool canConquerDL(int c, int r,int p, int** board){
              }
      }
      return enclosing;
-}
+};
 
 //=======================================================================================
 
@@ -136,7 +108,7 @@ bool canConquerDown(int c, int r,int p, int** board){
              }
      }
      return enclosing;
-}
+};
 
 
 //=======================================================================================
@@ -155,7 +127,7 @@ bool canConquerDR(int c, int r,int p, int** board){
              }
      }
      return enclosing;
-}
+};
 
 
 
@@ -177,7 +149,7 @@ bool canConquerLeft(int c, int r,int p, int** board){
              }
      }
      return enclosing;
-}
+};
 
 //=======================================================================================
 
@@ -196,7 +168,7 @@ bool canConquerRight(int c, int r,int p, int** board){
              }
      }
      return enclosing;
-}
+};
 
 
 //=======================================================================================
@@ -215,7 +187,7 @@ bool canConquerUL(int c, int r,int p, int** board){
              }
      }
      return enclosing;
-}
+};
 
 
 
@@ -236,7 +208,7 @@ bool canConquerUp(int c, int r,int p, int** board){
              }
      }
      return enclosing;
-}
+};
 
 //=======================================================================================
 bool canConquerUR(int c, int r,int p, int** board){
@@ -254,7 +226,7 @@ bool canConquerUR(int c, int r,int p, int** board){
              }
      }
      return enclosing;
-}
+};
 
 
 
@@ -276,7 +248,6 @@ int Conquer(int c, int r, int directionX, int directionY, int** board,int p)
                         x += directionX;
                         y += directionY;
 
-			cout << "x" << x << "y" << y << endl;
                         //if is not an own chip
                         if (board[x][y] != p) {
                                 board[x][y] = p;
@@ -284,7 +255,7 @@ int Conquer(int c, int r, int directionX, int directionY, int** board,int p)
                                 ownChip = true;
                         }
                 }
-        }
+        };
 //=======================================================================================
 
 void fixBoard(int c, int r,  int** board, int p)
@@ -312,11 +283,36 @@ if(canConquerUL(  c,  r, p, board ))
 
 if(canConquerUR(  c,  r, p, board ))
 {	Conquer( c,  r, 1, -1,  board, p);	}
-}
+};
 
 
 //=======================================================================================
+extern "C"{
 
+//	jboolean Java_com_ec327cassio_reversi_MainActivity_getString(JNIEnv * env, jobject )
+//	{
+//		return env->NewStringUTF(CPPgetString());
+//	}
+
+
+	JNIEXPORT jboolean JNICALL
+	jboolean Java_com_ec327cassio_reversi_MainActivity_isValid(JNIEnv * env, jobject, jint x,
+	jint y, jint ** board, jint player)
+	{
+		return (bool) canPut;
+
+	}
+
+	JNIEXPORT void JNICALL
+	jvoid Java_com_ec327cassio_reversi_MainActivity_FixBoard(JNIEnv * env, jobject, jint c,
+	jint r, jint ** board, jint p)
+	{
+		return env -> board;
+
+	}
+
+
+}
 /*android.mk
  *
  * LOCAL_SRC_FILES += isValid.cpp

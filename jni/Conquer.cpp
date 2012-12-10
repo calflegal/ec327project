@@ -20,7 +20,7 @@ int Conquer(int c, int r, int directionX, int directionY, int** board,int p)
                         x += directionX;
                         y += directionY;
 
-			cout << "x" << x << "y" << y << endl;
+
                         //if is not an own chip
                         if (board[x][y] != p) {
                                 board[x][y] = p;
@@ -28,4 +28,4 @@ int Conquer(int c, int r, int directionX, int directionY, int** board,int p)
                                 ownChip = true;
                         }
                 }
-        }
+        };

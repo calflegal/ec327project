@@ -22,7 +22,7 @@ bool isValid( int c, int r, int** board, int p) {
 
              return canPut;
 
-        }
+        };
 
 /*
 bool isEmpty(int c,int r,int** board){
