@@ -3,10 +3,11 @@
 
 
 
+
+
+
 int  op(int player);
 int checkLine(int player, int x, int y, int directionX, int directionY,int** board);
-
-
 
  bool isValid(int x, int y, int**board, int player);
  bool isEmpty(int c, int r,int** board);
@@ -21,7 +22,6 @@ int checkLine(int player, int x, int y, int directionX, int directionY,int** boa
  bool canConquerUR(int x, int y, int player,int** board);
 
 void fixBoard(int c, int r,  int** board, int p);
-
 
 int Conquer(int c, int r, int x, int y, int p,int** board);
 

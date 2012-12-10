@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
 	//apparently Java doesn't know what to do with pointers
 	public native boolean isValid(int x, int y, int board[][], int player);
 	
-	public native void FixBoard(int c, int r,  int  board[][], int p);
+//	public native void FixBoard(int c, int r,  int  board[][], int p);
 //=------------------------------------------------------------------------
 	
 	@Override
@@ -123,11 +123,13 @@ public class MainActivity extends Activity {
 		// the index of the desired move, like this:
 		//if (moveIsAllowed(index x, index y,gamestate_ints,count %2)
 			//if it's an okay move, add to array of circles. Also add it to ints array
+		
 		if(isValid(x, y, gamestate_int, movecount %2))
 		{			
 			gamestate_int[x][y] = movecount %2;
-			FixBoard(x, y, gamestate_int, movecount %2);					
+	//		FixBoard(x, y, gamestate_int, movecount %2);					
 		}
+		
 /*		else
 		{
 			Context context = getApplicationContext();

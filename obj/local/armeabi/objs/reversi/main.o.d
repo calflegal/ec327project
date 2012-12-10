@@ -1,16 +1,8 @@
-obj/local/armeabi/objs/reversi/main.o: jni/main.cpp \
- /Users/calvinflegal/Developer/android-ndk-r8c/platforms/android-14/arch-arm/usr/include/jni.h \
- /Users/calvinflegal/Developer/android-ndk-r8c/platforms/android-14/arch-arm/usr/include/string.h \
- /Users/calvinflegal/Developer/android-ndk-r8c/platforms/android-14/arch-arm/usr/include/sys/cdefs.h \
- /Users/calvinflegal/Developer/android-ndk-r8c/platforms/android-14/arch-arm/usr/include/sys/cdefs_elf.h \
- /Users/calvinflegal/Developer/android-ndk-r8c/platforms/android-14/arch-arm/usr/include/malloc.h
+/cygdrive/c/Users/Andy/Documents/GitHub/ec327project/obj/local/armeabi/objs/reversi/main.o: \
+ /cygdrive/c/Users/Andy/Documents/GitHub/ec327project/jni/main.cpp \
+ /cygdrive/c/Users/Andy/Downloads/android-ndk-r8c-windows/android-ndk-r8c/platforms/android-14/arch-arm/usr/include/jni.h \
+ /cygdrive/c/Users/Andy/Documents/GitHub/ec327project/jni/gamelogic.h
 
-/Users/calvinflegal/Developer/android-ndk-r8c/platforms/android-14/arch-arm/usr/include/jni.h:
+/cygdrive/c/Users/Andy/Downloads/android-ndk-r8c-windows/android-ndk-r8c/platforms/android-14/arch-arm/usr/include/jni.h:
 
-/Users/calvinflegal/Developer/android-ndk-r8c/platforms/android-14/arch-arm/usr/include/string.h:
-
-/Users/calvinflegal/Developer/android-ndk-r8c/platforms/android-14/arch-arm/usr/include/sys/cdefs.h:
-
-/Users/calvinflegal/Developer/android-ndk-r8c/platforms/android-14/arch-arm/usr/include/sys/cdefs_elf.h:
-
-/Users/calvinflegal/Developer/android-ndk-r8c/platforms/android-14/arch-arm/usr/include/malloc.h:
+/cygdrive/c/Users/Andy/Documents/GitHub/ec327project/jni/gamelogic.h:

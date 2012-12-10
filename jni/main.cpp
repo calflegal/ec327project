@@ -4,9 +4,9 @@
 
 
 //=======================================================================================
-const char * CPPgetString(){
-	return "it worked!";
-}
+//const char * CPPgetString(){
+//	return "it worked!";
+//};
 //=======================================================================================
 bool isValid( int c, int r, int** board, int p) {
              bool canPut;
@@ -296,22 +296,22 @@ extern "C"{
 
 
 	JNIEXPORT jboolean JNICALL
-	jboolean Java_com_ec327cassio_reversi_MainActivity_isValid(JNIEnv * env, jobject, jint x,
+	Java_com_ec327cassio_reversi_MainActivity_isValid(JNIEnv * env, jobject, jint x,
 	jint y, jint ** board, jint player)
 	{
-		return (bool) canPut;
+		return (bool) isValid;
 
 	}
-
+/*
 	JNIEXPORT void JNICALL
-	jvoid Java_com_ec327cassio_reversi_MainActivity_FixBoard(JNIEnv * env, jobject, jint c,
+    Java_com_ec327cassio_reversi_MainActivity_FixBoard(JNIEnv * env, jobject, jint c,
 	jint r, jint ** board, jint p)
 	{
-		return env -> board;
+		return ** board;
 
 	}
 
-
+*/
 }
 /*android.mk
  *
