@@ -78,6 +78,8 @@ public class MainActivity extends Activity {
 		 this.grid.select(3, 3);
 		 this.tryMoveAtIndex(3,3);
 
+		 
+
 		 //set the member variables for the shaking sensor.		 
 		 mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		    mSensorManager.registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
@@ -133,11 +135,8 @@ public class MainActivity extends Activity {
 		if(isValid(x, y, gamestate_int, movecount %2))
 		{	//make move.		
 			gamestate_int[x][y] = movecount %2;
-			//FixBoard(x, y, gamestate_int, movecount %2);
-			gamestate_circles[x][y] = new Circle(gl.getContext(),
-					(grid.tile_width/2)+grid.selX*(grid.tile_width),(grid.tile_height/2)+grid.selY*(grid.tile_height),25,movecount%2);
-			
-			
+			//fixBoard(x, y, gamestate_int, movecount %2);
+
 		}
 		
 		else
@@ -151,7 +150,9 @@ public class MainActivity extends Activity {
 			toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 0);
 		}
 
-
+		gamestate_circles[x][y] = new Circle(gl.getContext(),
+				(grid.tile_width/2)+grid.selX*(grid.tile_width),(grid.tile_height/2)+grid.selY*(grid.tile_height),25,movecount%2);
+	gl.addView(gamestate_circles[x][y]);
 		//	pass un-updated array to C, then change colors as needed:
 			//updateBoard(gamestate_ints) (pass reference)??
 			//iterate over gamestate_circles, fixing colors and reprinting.
@@ -160,7 +161,7 @@ public class MainActivity extends Activity {
 			
 			
 			
-		gl.addView(gamestate_circles[x][y]);
+	
 		movecount++;
 		MainActivity.this.gameisnotover();
 		
