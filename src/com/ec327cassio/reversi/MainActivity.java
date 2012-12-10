@@ -133,7 +133,7 @@ public class MainActivity extends Activity {
 		if(isValid(x, y, gamestate_int, movecount %2))
 		{	//make move.		
 			gamestate_int[x][y] = movecount %2;
-			FixBoard(x, y, gamestate_int, movecount %2);
+			//FixBoard(x, y, gamestate_int, movecount %2);
 			gamestate_circles[x][y] = new Circle(gl.getContext(),
 					(grid.tile_width/2)+grid.selX*(grid.tile_width),(grid.tile_height/2)+grid.selY*(grid.tile_height),25,movecount%2);
 			
@@ -161,7 +161,6 @@ public class MainActivity extends Activity {
 			
 			
 		gl.addView(gamestate_circles[x][y]);
-		Log.d("The count of this move is", Integer.toString(movecount));
 		movecount++;
 		MainActivity.this.gameisnotover();
 		
