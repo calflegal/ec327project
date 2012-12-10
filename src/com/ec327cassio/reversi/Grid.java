@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 public class Grid extends View{
     public float tile_width;    // width of one tile
@@ -14,14 +15,13 @@ public class Grid extends View{
     public final Rect selRect = new Rect();  // selected rectangle
     private final Paint mPaint;
 	
-public Grid(Context context) {
+public Grid(Context context, int width) {
         super(context);
-        this.tile_width = 60;
+        this.tile_width = width/8f;
         this.tile_height = this.tile_width;
         this.mPaint = new Paint();
         
 } 
-
 
 
         

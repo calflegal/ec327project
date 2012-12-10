@@ -18,7 +18,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/board_view"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:background="#FF0000FF"
         android:onClick="reset"
-        android:text="@string/Reset" />
+        android:text="@string/Reset"
+        android:textColor="#FFFFFFFF" />
   
 </RelativeLayout>
