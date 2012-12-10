@@ -3,12 +3,7 @@
 //put functions here
 
 
-//=======================================================================================
-//const char * CPPgetString(){
-//	return "it worked!";
-//};
-//=======================================================================================
-bool CisValid( int x, int y, int** board, int player) {
+bool C_isValid( int x, int y, int** board, int player) {
              bool Valid;
 
              Valid = isEmpty(x,y,board) && ( (canConquerUp(x, y, player, board))	||
@@ -23,7 +18,7 @@ bool CisValid( int x, int y, int** board, int player) {
 
              return Valid;
 
-        };
+        }
 
 //=======================================================================================
 bool isEmpty(int x,int y,int** board){
@@ -32,7 +27,7 @@ bool isEmpty(int x,int y,int** board){
              { 	 return true;				}
              else
              { 	 return false;}
-};
+}
 //=======================================================================================
 int op(int player){
 	if(player==1)
@@ -40,7 +35,7 @@ int op(int player){
 		else if (player == 0)
 	{		return 1;	}
 
-};
+}
 
 //=======================================================================================
 int checkLine(int player, int initialColumn,
@@ -70,7 +65,7 @@ int checkLine(int player, int initialColumn,
   }
 
  return cline;
-  };
+  }
 //=======================================================================================
 
 bool canConquerDL(int x, int y,int player, int** board){
@@ -89,7 +84,7 @@ bool canConquerDL(int x, int y,int player, int** board){
              }
      }
      return check;
-};
+}
 
 //=======================================================================================
 
@@ -108,7 +103,7 @@ bool canConquerDown(int x, int y,int player, int** board){
              }
      }
      return check;
-};
+}
 
 
 //=======================================================================================
@@ -127,7 +122,7 @@ bool canConquerDR(int x, int y,int player, int** board){
              }
      }
      return check;
-};
+}
 
 
 
@@ -149,7 +144,7 @@ bool canConquerLeft(int x, int y,int player, int** board){
              }
      }
      return check;
-};
+}
 
 //=======================================================================================
 
@@ -168,7 +163,7 @@ bool canConquerRight(int x, int y,int player, int** board){
              }
      }
      return check;
-};
+}
 
 
 //=======================================================================================
@@ -187,7 +182,7 @@ bool canConquerUL(int x, int y,int player, int** board){
              }
      }
      return check;
-};
+}
 
 
 
@@ -208,7 +203,7 @@ bool canConquerUp(int x, int y,int player, int** board){
              }
      }
      return check;
-};
+}
 
 //=======================================================================================
 bool canConquerUR(int x, int y,int player, int** board){
@@ -226,7 +221,7 @@ bool canConquerUR(int x, int y,int player, int** board){
              }
      }
      return check;
-};
+}
 
 
 
@@ -255,7 +250,7 @@ int Conquer(int x, int y, int directionX, int directionY, int** board,int player
                                 ownChip = true;
                         }
                 }
-        };
+        }
 //=======================================================================================
 
 void fixBoard(int x, int y,  int** board, int player)
@@ -283,7 +278,7 @@ if(canConquerUL(  x,  y, player, board ))
 
 if(canConquerUR(  x,  y, player, board ))
 {	Conquer( x,  y, 1, -1,  board, player);	}
-};
+}
 
 
 //=======================================================================================
@@ -296,10 +291,31 @@ extern "C"{
 
 
 	JNIEXPORT jboolean JNICALL
-	Java_com_ec327cassio_reversi_MainActivity_isValid(JNIEnv * env, jobject, jint x,
-	jint y, jint **  board, jint player)
+Java_com_ec327cassio_reversi_MainActivity_isValid(JNIEnv * env, jobject, jint x,
+	jint y, jobjectArray board, jint player)
 	{
-		return (bool) CisValid(x,y,board,player);
+		int len1 = 8;
+		int **the_c_board;
+		the_c_board = new int*[len1];
+		//populate
+		for (int i =0; i < 8; i++) {
+			jintArray row = (jintArray)env->GetObjectArrayElement(board,i);
+			jint *element = env->GetIntArrayElements(row,0);
+			//allocate the sub-array for the row
+			the_c_board[i] = new int[len1];
+			for (int j=0; j<8; j++) {
+				the_c_board[i][j] = element[j];
+			}
+		}
+		bool result = C_isValid((int)x,(int) y,the_c_board,(int)player);
+
+
+		//properly delete the array before returning bool
+		for (int k=0; k<8; k++) {
+			delete [] the_c_board[k];
+		}
+		delete [] the_c_board;
+		return (jboolean) result;
 
 	}
 
