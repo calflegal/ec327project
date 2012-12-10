@@ -297,21 +297,21 @@ extern "C"{
 
 	JNIEXPORT jboolean JNICALL
 	Java_com_ec327cassio_reversi_MainActivity_isValid(JNIEnv * env, jobject, jint x,
-	jint y, jint ** board, jint player)
+	jint y, jint  board[8][8], jint player)
 	{
 		return (bool) isValid;
 
 	}
-/*
+
 	JNIEXPORT void JNICALL
     Java_com_ec327cassio_reversi_MainActivity_FixBoard(JNIEnv * env, jobject, jint x,
-	jint y, jint ** board, jint player)
+	jint y, jint board[8][8], jint player)
 	{
-		return ** board;
+
 
 	}
 
-*/
+
 }
 /*android.mk
  *
