@@ -1,6 +1,6 @@
-//#include <jni.h>
+#include <jni.h>
 #include "gamelogic.h"
-#include <iostream>
+
 using namespace std;
 
 //put functions here
@@ -23,6 +23,7 @@ bool isValid( int c, int r, int** board, int p) {
              return canPut;
 
         }
+
 
 
 

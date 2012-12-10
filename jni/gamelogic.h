@@ -19,6 +19,13 @@ extern int first(int  x, int  y);
  bool isEmpty(int c, int r,int** board);
 
  bool canConquerUp(int x, int y, int player,int** board);
+ bool canConquerDown(int x, int y, int player,int** board);
+ bool canConquerLeft(int x, int y, int player,int** board);
+ bool canConquerRight(int x, int y, int player,int** board);
+ bool canConquerDL(int x, int y, int player,int** board);
+ bool canConquerDR(int x, int y, int player,int** board);
+ bool canConquerUL(int x, int y, int player,int** board);
+ bool canConquerUR(int x, int y, int player,int** board);
 
 void fixBoard(int c, int r,  int** board, int p);
 
