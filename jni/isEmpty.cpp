@@ -13,9 +13,14 @@ extern "C"{
 }
 */
 
-bool isEmpty(int* board){
-             if(board[r][c] == 2)	//val 2 = empty
-             { return true }
+
+bool isEmpty(int c,int r,int** board){
+
+             if(board[c][r] == 0)	//val 2 = empty
+             { cout << "isempty:t" <<c<<"r"<<r<<endl;
+			 return true;
+				}
              else
-             { return false}
-          }
+             { cout << "isempty:f" <<endl;
+			 return false;}
+}

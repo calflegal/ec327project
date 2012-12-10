@@ -4,14 +4,15 @@
 
 
 
-int Conquer(int c, int r, int directionX, int directionY, p, int* board)
+
+int Conquer(int c, int r, int directionX, int directionY, int** board,int p)
 {
 
                 int x = c;
                 int y = r;
+
                 bool ownChip = false;
 
-             //   int[][] board = gboard();
 
                 //conquer until an own chip is found
                 while ( !ownChip ) {
@@ -19,9 +20,10 @@ int Conquer(int c, int r, int directionX, int directionY, p, int* board)
                         x += directionX;
                         y += directionY;
 
+			cout << "x" << x << "y" << y << endl;
                         //if is not an own chip
-                        if (board[x][y] != player) {
-                                board[x][y] = player;
+                        if (board[x][y] != p) {
+                                board[x][y] = p;
                         } else {
                                 ownChip = true;
                         }

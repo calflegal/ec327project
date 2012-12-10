@@ -5,15 +5,16 @@
 
 
 int checkLine(int p, int initialColumn,
- int initialRow, int directionX, int directionY, int* board) {
+ int initialRow, int directionX, int directionY, int** board) {
 
 // stores the value of the first position with a value different than
  // the player value
- int cline = player;
- boolean resolved = false;
+ int cline = p;
+ bool resolved = false;
 
   int x = initialColumn;
     int y = initialRow;
+
 
    while (!resolved) {
 
@@ -22,7 +23,7 @@ int checkLine(int p, int initialColumn,
    // if we are inside the bounds of the board game
       if (x >= 0 && x < 8 && y >= 0 && y < 8) {
 
-  if (board[x][y] != player) {
+  if (board[x][y] != p) {
         resolved = true;
           cline = board[x][y];
    }
@@ -34,4 +35,3 @@ int checkLine(int p, int initialColumn,
 
  return cline;
   }
-

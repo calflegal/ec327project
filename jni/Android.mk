@@ -10,6 +10,5 @@ LOCAL_SRC_FILES := checkLine.cpp
 LOCAL_SRC_FILES := op.cpp
 LOCAL_SRC_FILES := isEmpty.cpp
 LOCAL_SRC_FILES := Conquer.cpp
-LOCAL_SRC_FILES := WheretoConquer.cpp
 
 include $(BUILD_SHARED_LIBRARY)
