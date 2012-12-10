@@ -13,7 +13,7 @@ extern "C"{
 }
 */
 
-bool isEmpty(int board[8][8]){
+bool isEmpty(int* board){
              if(board[r][c] == 2)	//val 2 = empty
              { return true }
              else

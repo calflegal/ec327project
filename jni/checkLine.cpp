@@ -5,7 +5,7 @@
 
 
 int checkLine(int p, int initialColumn,
- int initialRow, int directionX, int directionY) {
+ int initialRow, int directionX, int directionY, int* board) {
 
 // stores the value of the first position with a value different than
  // the player value

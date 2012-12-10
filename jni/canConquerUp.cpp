@@ -2,7 +2,7 @@
 #include "gamelogic.h"
 
 
-bool canConquerUp(c, r, p){
+bool canConquerUp(c, r, p, int* board){
 	 bool enclosing = false;
      // impossible to conquer if space is less than 2
      if (r > 1) {
