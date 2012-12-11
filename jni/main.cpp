@@ -1,7 +1,25 @@
 #include <jni.h>
-#include "gamelogic.h"
 #include <cstddef>
 //put functions here
+
+int  op(int player);
+int checkLine(int player, int x, int y, int directionX, int directionY,int** board);
+
+ bool isValid(int x, int y, int**board, int player);
+ bool isEmpty(int c, int r,int** board);
+
+ bool canConquerUp(int x, int y, int player,int** board);
+ bool canConquerDown(int x, int y, int player,int** board);
+ bool canConquerLeft(int x, int y, int player,int** board);
+ bool canConquerRight(int x, int y, int player,int** board);
+ bool canConquerDL(int x, int y, int player,int** board);
+ bool canConquerDR(int x, int y, int player,int** board);
+ bool canConquerUL(int x, int y, int player,int** board);
+ bool canConquerUR(int x, int y, int player,int** board);
+
+void fixBoard(int c, int r,  int** board, int p);
+
+int Conquer(int c, int r, int x, int y, int p,int** board);
 
 
 bool C_isValid( int x, int y, int** board, int player) {
@@ -19,7 +37,7 @@ bool C_isValid( int x, int y, int** board, int player) {
 
              return Valid;
 
-        }
+        };
 
 //=======================================================================================
 bool isEmpty(int x,int y,int** board){
@@ -28,7 +46,7 @@ bool isEmpty(int x,int y,int** board){
              { 	 return true;				}
              else
              { 	 return false;}
-}
+};
 //=======================================================================================
 int op(int player){
 	if(player==1)
@@ -36,7 +54,7 @@ int op(int player){
 		else if (player == 0)
 	{		return 1;	}
 
-}
+};
 
 //=======================================================================================
 int checkLine(int player, int initialColumn,
@@ -66,7 +84,7 @@ int checkLine(int player, int initialColumn,
   }
 
  return cline;
-  }
+  };
 //=======================================================================================
 
 bool canConquerDL(int x, int y,int player, int** board){
@@ -85,7 +103,7 @@ bool canConquerDL(int x, int y,int player, int** board){
              }
      }
      return check;
-}
+};
 
 //=======================================================================================
 
@@ -104,7 +122,7 @@ bool canConquerDown(int x, int y,int player, int** board){
              }
      }
      return check;
-}
+};
 
 
 //=======================================================================================
@@ -123,7 +141,7 @@ bool canConquerDR(int x, int y,int player, int** board){
              }
      }
      return check;
-}
+};
 
 
 
@@ -145,7 +163,7 @@ bool canConquerLeft(int x, int y,int player, int** board){
              }
      }
      return check;
-}
+};
 
 //=======================================================================================
 
@@ -164,7 +182,7 @@ bool canConquerRight(int x, int y,int player, int** board){
              }
      }
      return check;
-}
+};
 
 
 //=======================================================================================
@@ -183,8 +201,7 @@ bool canConquerUL(int x, int y,int player, int** board){
              }
      }
      return check;
-}
-
+};
 
 
 //=======================================================================================
@@ -204,7 +221,7 @@ bool canConquerUp(int x, int y,int player, int** board){
              }
      }
      return check;
-}
+};
 
 //=======================================================================================
 bool canConquerUR(int x, int y,int player, int** board){
@@ -222,7 +239,7 @@ bool canConquerUR(int x, int y,int player, int** board){
              }
      }
      return check;
-}
+};
 
 
 
@@ -232,8 +249,8 @@ bool canConquerUR(int x, int y,int player, int** board){
 int Conquer(int x, int y, int directionX, int directionY, int** board,int player)
 {
 
-         //       int x = x;
-            //    int y = y;
+                int X = x;
+                int Y = y;
 
                 bool ownChip = false;
 
@@ -241,17 +258,17 @@ int Conquer(int x, int y, int directionX, int directionY, int** board,int player
                 //conquer until an own chip is found
                 while ( !ownChip ) {
                         //advancing in the given direction
-                        x += directionX;
-                        y += directionY;
+                        X += directionX;
+                        Y += directionY;
 
                         //if is not an own chip
-                        if (board[x][y] != player) {
-                                board[x][y] = player;
+                        if (board[X][Y] != player) {
+                                board[X][Y] = player;
                         } else {
                                 ownChip = true;
                         }
                 }
-        }
+        };
 //=======================================================================================
 
 void C_fixBoard(int x, int y,  int** board, int player)
@@ -279,7 +296,7 @@ if(canConquerUL(  x,  y, player, board ))
 
 if(canConquerUR(  x,  y, player, board ))
 {	Conquer( x,  y, 1, -1,  board, player);	}
-}
+};
 
 
 //=======================================================================================
@@ -363,11 +380,10 @@ Java_com_ec327cassio_reversi_MainActivity_isValid(JNIEnv * env, jobject obj, jin
 
 
 				//properly delete the array before returning
-			/for (int k=0; k<8; k++) {
+			for (int k=0; k<8; k++) {
 					delete [] the_c_board[k];
 				}
 				delete [] the_c_board;
-
 				return myReturnable2DArray;
 
 

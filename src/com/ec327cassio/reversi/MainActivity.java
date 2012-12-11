@@ -1,4 +1,6 @@
 package com.ec327cassio.reversi;
+import java.util.Arrays;
+
 import android.R.bool;
 import android.app.Activity;
 import android.content.Context;
@@ -52,7 +54,7 @@ public class MainActivity extends Activity {
 
 	
 	public void setupBoard() {
-		gamestate_int[4][3] = 0;
+		gamestate_int[3][4] = 0;
 		redrawBoardFromIntArray();
 		movecount++;
 		
@@ -60,12 +62,10 @@ public class MainActivity extends Activity {
 		redrawBoardFromIntArray();
 		movecount++;
 		
-		MainActivity.this.grid.select(3, 4);
-		gamestate_int[3][4] = 0;
+		gamestate_int[4][3] = 0;
 		redrawBoardFromIntArray();
 		movecount++;
 		
-		MainActivity.this.grid.select(3, 3);
 		gamestate_int[3][3] = 1;
 		redrawBoardFromIntArray();
 		movecount++;
@@ -86,7 +86,7 @@ public class MainActivity extends Activity {
 		 //initialize gamestate_int to be an "empty" board
 		 for (int i=0; i <8; i++ ) {
 			 for (int j=0; j<8; j++) {
-				 this.gamestate_int[i][j] = 2;
+				 this.gamestate_int[j][i] = 2;
 			 }
 			 
 		 }
@@ -112,6 +112,8 @@ public class MainActivity extends Activity {
 			    		int y = (int) e.getY();
 			    		//update the grid property for the space touched.
 			    		MainActivity.this.grid.selectAtTouch(x, y);
+			    		Log.d("You touched x co-ord", Integer.toString(MainActivity.this.grid.selX));
+			    		Log.d("You touched y co-ord", Integer.toString(MainActivity.this.grid.selY));
 			    		if (gameisnotover()) {MainActivity.this.tryMoveAtIndex(grid.selX,grid.selY);}
 			    		return true;
 			    	}
@@ -147,7 +149,7 @@ public class MainActivity extends Activity {
 			for (int j=0; j<8; j++) {
 				if ((MainActivity.this.gamestate_int[i][j] == 0) //if it should be black but its null
 						&& (MainActivity.this.gamestate_circles[i][j] == null) ) {
-					MainActivity.this.grid.select(i,j);
+					MainActivity.this.grid.select(j,i);
 					gamestate_circles[i][j] = new Circle(gl.getContext(),
 							(grid.tile_width/2)+grid.selX*(grid.tile_width),(grid.tile_height/2)+grid.selY*(grid.tile_height),25,movecount%2);
 					gl.addView(gamestate_circles[i][j]);
@@ -155,7 +157,7 @@ public class MainActivity extends Activity {
 				}
 				else if ((MainActivity.this.gamestate_int[i][j] == 1) //if it should be white but its null
 						&& (MainActivity.this.gamestate_circles[i][j] == null) ) {
-					MainActivity.this.grid.select(i,j);
+					MainActivity.this.grid.select(j,i);
 					gamestate_circles[i][j] = new Circle(gl.getContext(),
 							(grid.tile_width/2)+grid.selX*(grid.tile_width),(grid.tile_height/2)+grid.selY*(grid.tile_height),25,movecount%2);
 					gl.addView(gamestate_circles[i][j]);
@@ -179,13 +181,28 @@ public class MainActivity extends Activity {
 	public void tryMoveAtIndex(int x,int y) {
 		//get board view
 		// RelativeLayout gl = (RelativeLayout) findViewById(R.id.board_view);
-		Log.d("The value of isValid is", Boolean.toString(isValid(x, y, gamestate_int, movecount %2)) );
-		if(isValid(x, y, gamestate_int, movecount %2))
+		if(isValid(x,y, gamestate_int, movecount %2))
 		{	//make move.		
-			gamestate_int[x][y] = movecount %2;
-
+			gamestate_int[y][x] = movecount %2;
+			Log.d("Before update row1:", Arrays.toString(gamestate_int[0]));
+			Log.d("Before update row2:", Arrays.toString(gamestate_int[1]));
+			Log.d("Before update row3:", Arrays.toString(gamestate_int[2]));
+			Log.d("Before update row4:", Arrays.toString(gamestate_int[3]));
+			Log.d("Before update row5:", Arrays.toString(gamestate_int[4]));
+			Log.d("Before update row6:", Arrays.toString(gamestate_int[5]));
+			Log.d("Before update row7:", Arrays.toString(gamestate_int[6]));
+			Log.d("Before update row8:", Arrays.toString(gamestate_int[7]));
 			
 			gamestate_int = FixBoard(x, y, gamestate_int, movecount %2);
+			Log.d("After update row1:", Arrays.toString(gamestate_int[0]));
+			Log.d("After update row2:", Arrays.toString(gamestate_int[1]));
+			Log.d("After update row3:", Arrays.toString(gamestate_int[2]));
+			Log.d("After update row4:", Arrays.toString(gamestate_int[3]));
+			Log.d("After update row5:", Arrays.toString(gamestate_int[4]));
+			Log.d("After update row6:", Arrays.toString(gamestate_int[5]));
+			Log.d("After update row7:", Arrays.toString(gamestate_int[6]));
+			Log.d("After update row8:", Arrays.toString(gamestate_int[7]));
+		
 			redrawBoardFromIntArray();
 			movecount++;
 			MainActivity.this.gameisnotover();
