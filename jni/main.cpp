@@ -44,7 +44,7 @@ int op(int player)
 }
 
 //=======================================================================================
-int checkLine(int player, int initialColumn, int initialRow, int directionX, int directionY, int** board)
+int checkLine(int player,int initialColumn,int initialRow,int directionX,int directionY,int** board)
 {
 	//cline reports value of last location of checkLine
 	int cline = player; 	//input is passed through OP function which player is actually opponent
@@ -93,8 +93,8 @@ bool canConquerDL(int x, int y,int player, int** board)
 			//a sandwhich state.
 
 			int value = checkLine(op(player), (x-1), (y+1) , -1, +1, board);
-			check = value == player; //if end location of checkline = to player's own piece
-		}							 //then it is conquerable. Else, not conquerable
+			check = value == player; //if end location of checkline = to player's own
+		}							 //piece then it is conquerable. Else, not conquerable
 	}
 	return check;
 }
@@ -240,7 +240,7 @@ int Conquer(int x, int y, int directionX, int directionY, int** board,int player
 		X += directionX;
 		Y += directionY;
 		//if is not an own chip
-		if (board[X][Y] != player)
+		if ((board[X][Y] != player) && (board[X][Y] != 2) )
 		{
 			board[X][Y] = player;	//convert values
 		}
@@ -354,7 +354,7 @@ extern "C"{
 
 
 				//properly delete the array before returning
-			/for (int k=0; k<8; k++) {
+			for (int k=0; k<8; k++) {
 					delete [] the_c_board[k];
 				}
 				delete [] the_c_board;
