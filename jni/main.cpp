@@ -27,7 +27,7 @@ bool C_isValid( int x, int y, int** board, int player)
 bool isEmpty(int x, int y, int** board)
 {
 	//If spot is empty, not valid
-	if(board[x][y] == 2)	//val 2 = empty
+	if(board[x][y] == 0)	//val 2 = empty
 	{ 	 return true;		}
 	else
 	{ 	 return false;		}
@@ -37,8 +37,8 @@ bool isEmpty(int x, int y, int** board)
 int op(int player)
 {	//Inverts player to make it simpler for checkline to check sandwhich states.
 	if		(player==1)
-	{		return 0;	}
-	else if (player == 0)
+	{		return 2;	}
+	else if (player == 2)
 	{		return 1;	}
 
 }
@@ -240,7 +240,7 @@ int Conquer(int x, int y, int directionX, int directionY, int** board,int player
 		X += directionX;
 		Y += directionY;
 		//if is not an own chip
-		if ((board[X][Y] != player) && (board[X][Y] != 2) )
+		if ((board[X][Y] != player) /* &&(board[X][Y] != 0)*/ )
 		{
 			board[X][Y] = player;	//convert values
 		}
