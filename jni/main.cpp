@@ -1,5 +1,6 @@
 #include <jni.h>
 #include "gamelogic.h"
+#include <cstddef>
 //put functions here
 
 
@@ -317,7 +318,7 @@ extern "C"{
 
 	}
 
-	JNIEXPORT void JNICALL
+	JNIEXPORT jobjectArray JNICALL
     Java_com_ec327cassio_reversi_MainActivity_FixBoard(JNIEnv * env, jobject obj, jint x,
 	jint y, jobjectArray board, jint player)
 	{
@@ -336,24 +337,29 @@ extern "C"{
 				}
 
 				C_fixBoard( (int) x, (int) y, the_c_board, (int)player );
+				jclass intArrayClass = env->FindClass("[I");
 
 
-				//do above but backwards and setObjectArrayElement
-				for(int m =0; m < 8; m++) {
-					jobjectArray row = (jobjectArray)env->GetObjectArrayElement(board,m);
-//					setting the array
-					for(int n = 0; n < 8; n++)
-					{
-					env->SetObjectArrayElement(row,(jsize) n,(jobject)the_c_board[m][n]);
-					}
-				}
+				jobjectArray myReturnable2DArray = env->NewObjectArray((jsize) 8,  intArrayClass,NULL);
+
+				    // Go through the firs dimension and add the second dimension arrays
+				    for (unsigned int p = 0; p < 8; p++)
+				    {
+				        jintArray intArray = env->NewIntArray(8);
+				        env->SetIntArrayRegion(intArray, (jsize) 0, (jsize) 8, (jint*) the_c_board[p]);
+				        env->SetObjectArrayElement(myReturnable2DArray, (jsize) p, intArray);
+				        env->DeleteLocalRef(intArray);
+				    }
 
 
-				//properly delete the array before returning bool
-				for (int k=0; k<8; k++) {
+
+				//properly delete the array before returning
+			/for (int k=0; k<8; k++) {
 					delete [] the_c_board[k];
 				}
 				delete [] the_c_board;
+
+				return myReturnable2DArray;
 
 
 	}
