@@ -46,7 +46,7 @@ public class MainActivity extends Activity {
 	//apparently Java doesn't know what to do with pointers
 	public native boolean isValid(int x, int y, int board[][], int player);
 	
-	public native void FixBoard(int x, int y,  int  board[][], int player);
+	public native int[][] FixBoard(int x, int y,  int  board[][], int player);
 //=------------------------------------------------------------------------
 	
 
@@ -185,7 +185,7 @@ public class MainActivity extends Activity {
 			gamestate_int[x][y] = movecount %2;
 
 			
-			//FixBoard(x, y, gamestate_int, movecount %2);
+			gamestate_int = FixBoard(x, y, gamestate_int, movecount %2);
 			redrawBoardFromIntArray();
 			movecount++;
 			MainActivity.this.gameisnotover();
