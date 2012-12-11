@@ -49,7 +49,7 @@ public class MainActivity extends Activity {
 	
 	public native int[][] FixBoard(int x, int y,  int  board[][], int player);
 //=------------------------------------------------------------------------
-	
+
 
 	
 	public void setupBoard() {
@@ -70,12 +70,7 @@ public class MainActivity extends Activity {
 		gamestate_int[3][3] = 2;
 		redrawBoardFromIntArray();
 		movecount++;
-/*		
-		MainActivity.this.grid.select(0, 7);
-		gamestate_int[0][7] = 1;
-		redrawBoardFromIntArray();
-		movecount++;
-*/	
+
 		}
 	
 	@Override
