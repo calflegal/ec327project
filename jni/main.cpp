@@ -5,7 +5,7 @@
 
 bool C_isValid( int x, int y, int** board, int player)
 {
-
+				//checks if current position is a valid move
 	bool Valid;
 
 	Valid = isEmpty(x,y,board) && ( (canConquerUp(x, y, player, board))		||
@@ -17,7 +17,7 @@ bool C_isValid( int x, int y, int** board, int player)
             		 	 	 	(canConquerUL(x, y, player, board)) 	||
             		 	 	 	(canConquerUR(x, y, player, board))    );
 
-
+			//if spot is empty and any of the conquers return true, then it is valid
 	return Valid;
 
 }
@@ -58,6 +58,7 @@ int checkLine(int player, int initialColumn, int initialRow, int directionX, int
 
 		x += directionX;
 		y += directionY;
+
 		// Conditional to keep checkline on the board
 		if (x >= 0 && x < 8 && y >= 0 && y < 8) {
 
@@ -83,11 +84,13 @@ bool canConquerDL(int x, int y,int player, int** board)
 {
 	bool check = false;
 	// conquer needs a minimum of 2 spaces to conquer so the edge cases(DL) will be false.
+
 	if (x > 1 && y < 6 )
 	{
 		if (board[x-1][y+1] == op(player))	//checks if DL position is an enemy
 		{	//calls checkline function to see if conversion in current direction leads to
 			//a sandwhich state.
+
 			int value = checkLine(op(player), (x-1), (y+1) , -1, +1, board);
 			check = value == player; //if end location of checkline = to player's own piece
 		}							 //then it is conquerable. Else, not conquerable
@@ -101,11 +104,13 @@ bool canConquerDown(int x, int y,int player, int** board)
 {
 	bool check = false;
 	// conquer needs a minimum of 2 spaces to conquer so the edge cases(D) will be false.
+
 	if (y <6 )
 	{
 		if (board[x][y+1] == op(player)) //checks if down position is an enemy
 		{		//calls checkline function to see if conversion in current direction leads to
 				//a sandwhich state.
+
 			int value = checkLine(op(player), x, (y+1) , 0, 1, board);
 			check = value ==player;	 //if end location of checkline = to player's own piece
 									 //then it is conquerable. Else, not conquerable
@@ -284,7 +289,7 @@ extern "C"{
 
 
 	JNIEXPORT jboolean JNICALL
-Java_com_ec327cassio_reversi_MainActivity_isValid(JNIEnv * env, jobject obj, jint x,
+	Java_com_ec327cassio_reversi_MainActivity_isValid(JNIEnv * env, jobject obj, jint x,
 	jint y, jobjectArray board, jint player)
 	{
 		int len1 = 8;
