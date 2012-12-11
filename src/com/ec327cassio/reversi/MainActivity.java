@@ -1,6 +1,7 @@
 package com.ec327cassio.reversi;
 import java.util.Arrays;
 
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -53,6 +54,7 @@ public class MainActivity extends Activity {
 
 	
 	public void setupBoard() {
+
 		gamestate_int[4][3] = 1;
 		redrawBoardFromIntArray();
 		movecount++;
@@ -61,6 +63,7 @@ public class MainActivity extends Activity {
 		redrawBoardFromIntArray();
 		movecount++;
 		
+
 		MainActivity.this.grid.select(3, 4);
 		gamestate_int[3][4] = 1;
 		redrawBoardFromIntArray();
@@ -87,6 +90,7 @@ public class MainActivity extends Activity {
 		 //initialize gamestate_int to be an "empty" board
 		 for (int i=0; i <8; i++ ) {
 			 for (int j=0; j<8; j++) {
+
 				 this.gamestate_int[i][j] = 0;
 			 }
 			 
@@ -113,6 +117,8 @@ public class MainActivity extends Activity {
 			    		int y = (int) e.getY();
 			    		//update the grid property for the space touched.
 			    		MainActivity.this.grid.selectAtTouch(x, y);
+			    		Log.d("You touched x co-ord", Integer.toString(MainActivity.this.grid.selX));
+			    		Log.d("You touched y co-ord", Integer.toString(MainActivity.this.grid.selY));
 			    		if (gameisnotover()) {MainActivity.this.tryMoveAtIndex(grid.selX,grid.selY);}
 			    		return true;
 			    	}
@@ -146,22 +152,25 @@ public class MainActivity extends Activity {
 		RelativeLayout gl = (RelativeLayout) findViewById(R.id.board_view);
 		for (int i=0; i <8; i++) {
 			for (int j=0; j<8; j++) {
+
 				if ((MainActivity.this.gamestate_int[i][j] == 1) //if it should be black but its null
 						&& (MainActivity.this.gamestate_circles[i][j] == null) ) {
 					MainActivity.this.grid.select(i,j);
-					gamestate_circles[i][j] = new Circle(gl.getContext(),
+					gamestate_circles[j][i] = new Circle(gl.getContext(),
 							(grid.tile_width/2)+grid.selX*(grid.tile_width),(grid.tile_height/2)+grid.selY*(grid.tile_height),25,movecount%2);
-					gl.addView(gamestate_circles[i][j]);
+					gl.addView(gamestate_circles[j][i]);
 						
 				}
+
 				else if ((MainActivity.this.gamestate_int[i][j] ==2) //if it should be white but its null
 						&& (MainActivity.this.gamestate_circles[i][j] == null) ) {
 					MainActivity.this.grid.select(i,j);
-					gamestate_circles[i][j] = new Circle(gl.getContext(),
+					gamestate_circles[j][i] = new Circle(gl.getContext(),
 							(grid.tile_width/2)+grid.selX*(grid.tile_width),(grid.tile_height/2)+grid.selY*(grid.tile_height),25,movecount%2);
-					gl.addView(gamestate_circles[i][j]);
+					gl.addView(gamestate_circles[j][i]);
 						
 				}
+
 				else if ((MainActivity.this.gamestate_int[i][j] == 1) //if it should be black, but its white
 						&& (MainActivity.this.gamestate_circles[i][j].mPaint.getColor() != Color.BLACK) ) {
 					MainActivity.this.gamestate_circles[i][j].mPaint.setColor(Color.BLACK);
@@ -180,6 +189,7 @@ public class MainActivity extends Activity {
 	public void tryMoveAtIndex(int x,int y) {
 		//get board view
 		// RelativeLayout gl = (RelativeLayout) findViewById(R.id.board_view);
+
 		Log.d("The value of isValid is", Boolean.toString(isValid(x, y, gamestate_int, (movecount %2)+1)) );
 		if(isValid(x, y, gamestate_int, (movecount %2)+1))
 		{	//make move.		
