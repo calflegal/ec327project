@@ -147,31 +147,31 @@ public class MainActivity extends Activity {
 		RelativeLayout gl = (RelativeLayout) findViewById(R.id.board_view);
 		for (int i=0; i <8; i++) {
 			for (int j=0; j<8; j++) {
-				if ((MainActivity.this.gamestate_int[i][j] == 0) //if it should be black but its null
-						&& (MainActivity.this.gamestate_circles[i][j] == null) ) {
-					MainActivity.this.grid.select(j,i);
-					gamestate_circles[i][j] = new Circle(gl.getContext(),
+				if ((MainActivity.this.gamestate_int[j][i] == 0) //if it should be black but its null
+						&& (MainActivity.this.gamestate_circles[j][i] == null) ) {
+					MainActivity.this.grid.select(i,j);
+					gamestate_circles[j][i] = new Circle(gl.getContext(),
 							(grid.tile_width/2)+grid.selX*(grid.tile_width),(grid.tile_height/2)+grid.selY*(grid.tile_height),25,movecount%2);
-					gl.addView(gamestate_circles[i][j]);
+					gl.addView(gamestate_circles[j][i]);
 						
 				}
-				else if ((MainActivity.this.gamestate_int[i][j] == 1) //if it should be white but its null
-						&& (MainActivity.this.gamestate_circles[i][j] == null) ) {
-					MainActivity.this.grid.select(j,i);
-					gamestate_circles[i][j] = new Circle(gl.getContext(),
+				else if ((MainActivity.this.gamestate_int[j][i] == 1) //if it should be white but its null
+						&& (MainActivity.this.gamestate_circles[j][i] == null) ) {
+					MainActivity.this.grid.select(i,j);
+					gamestate_circles[j][i] = new Circle(gl.getContext(),
 							(grid.tile_width/2)+grid.selX*(grid.tile_width),(grid.tile_height/2)+grid.selY*(grid.tile_height),25,movecount%2);
-					gl.addView(gamestate_circles[i][j]);
+					gl.addView(gamestate_circles[j][i]);
 						
 				}
-				else if ((MainActivity.this.gamestate_int[i][j] == 0) //if it should be black, but its white
-						&& (MainActivity.this.gamestate_circles[i][j].mPaint.getColor() != Color.BLACK) ) {
-					MainActivity.this.gamestate_circles[i][j].mPaint.setColor(Color.BLACK);
-					MainActivity.this.gamestate_circles[i][j].invalidate();
+				else if ((MainActivity.this.gamestate_int[j][i] == 0) //if it should be black, but its white
+						&& (MainActivity.this.gamestate_circles[j][i].mPaint.getColor() != Color.BLACK) ) {
+					MainActivity.this.gamestate_circles[j][i].mPaint.setColor(Color.BLACK);
+					MainActivity.this.gamestate_circles[j][i].invalidate();
 				}
-				else if ((MainActivity.this.gamestate_int[i][j] == 1) //if it should be white but its black
-						&& (MainActivity.this.gamestate_circles[i][j].mPaint.getColor() != Color.WHITE) ) {
-					MainActivity.this.gamestate_circles[i][j].mPaint.setColor(Color.WHITE);
-					MainActivity.this.gamestate_circles[i][j].invalidate(); 
+				else if ((MainActivity.this.gamestate_int[j][i] == 1) //if it should be white but its black
+						&& (MainActivity.this.gamestate_circles[j][i].mPaint.getColor() != Color.WHITE) ) {
+					MainActivity.this.gamestate_circles[j][i].mPaint.setColor(Color.WHITE);
+					MainActivity.this.gamestate_circles[j][i].invalidate(); 
 			
 				}
 			}
@@ -181,7 +181,7 @@ public class MainActivity extends Activity {
 	public void tryMoveAtIndex(int x,int y) {
 		//get board view
 		// RelativeLayout gl = (RelativeLayout) findViewById(R.id.board_view);
-		if(isValid(x,y, gamestate_int, movecount %2))
+		if(isValid(y,x, gamestate_int, movecount %2))
 		{	//make move.		
 			gamestate_int[y][x] = movecount %2;
 			Log.d("Before update row1:", Arrays.toString(gamestate_int[0]));
@@ -193,7 +193,7 @@ public class MainActivity extends Activity {
 			Log.d("Before update row7:", Arrays.toString(gamestate_int[6]));
 			Log.d("Before update row8:", Arrays.toString(gamestate_int[7]));
 			
-			gamestate_int = FixBoard(x, y, gamestate_int, movecount %2);
+			gamestate_int = FixBoard(y, x, gamestate_int, movecount %2);
 			Log.d("After update row1:", Arrays.toString(gamestate_int[0]));
 			Log.d("After update row2:", Arrays.toString(gamestate_int[1]));
 			Log.d("After update row3:", Arrays.toString(gamestate_int[2]));
