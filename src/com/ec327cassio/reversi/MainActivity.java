@@ -1,5 +1,6 @@
 package com.ec327cassio.reversi;
-import android.R.bool;
+import java.util.Arrays;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -69,8 +70,13 @@ public class MainActivity extends Activity {
 		gamestate_int[3][3] = 1;
 		redrawBoardFromIntArray();
 		movecount++;
-		
-	}
+/*		
+		MainActivity.this.grid.select(0, 7);
+		gamestate_int[0][7] = 1;
+		redrawBoardFromIntArray();
+		movecount++;
+*/	
+		}
 	
 	@Override
 	//called when activity started
@@ -183,11 +189,28 @@ public class MainActivity extends Activity {
 		if(isValid(x, y, gamestate_int, movecount %2))
 		{	//make move.		
 			gamestate_int[x][y] = movecount %2;
-
+			Log.d("The value of r1", Arrays.toString(gamestate_int[0]) );
+			Log.d("The value of r2", Arrays.toString(gamestate_int[1]) );
+			Log.d("The value of r3", Arrays.toString(gamestate_int[2]) );
+			Log.d("The value of r4", Arrays.toString(gamestate_int[3]) );
+			Log.d("The value of r5", Arrays.toString(gamestate_int[4]) );
+			Log.d("The value of r6", Arrays.toString(gamestate_int[5]) );
+			Log.d("The value of r7", Arrays.toString(gamestate_int[6]) );
+			Log.d("The value of r8", Arrays.toString(gamestate_int[7]) );
 			
 			gamestate_int = FixBoard(x, y, gamestate_int, movecount %2);
 			redrawBoardFromIntArray();
 			movecount++;
+			Log.d("The value2 of r1", Arrays.toString(gamestate_int[0]) );
+			Log.d("The value2 of r2", Arrays.toString(gamestate_int[1]) );
+			Log.d("The value2 of r3", Arrays.toString(gamestate_int[2]) );
+			Log.d("The value2 of r4", Arrays.toString(gamestate_int[3]) );
+			Log.d("The value2 of r5", Arrays.toString(gamestate_int[4]) );
+			Log.d("The value2 of r6", Arrays.toString(gamestate_int[5]) );
+			Log.d("The value2 of r7", Arrays.toString(gamestate_int[6]) );
+			Log.d("The value2 of r8", Arrays.toString(gamestate_int[7]) );
+
+			
 			MainActivity.this.gameisnotover();
 
 		}
@@ -204,7 +227,14 @@ public class MainActivity extends Activity {
 
 		
 	}
-
+	Log.d("The value2 of r8", Arrays.toString(gamestate_circles[0]) );		
+	Log.d("The value2 of r8", Arrays.toString(gamestate_circles[1]) );	
+	Log.d("The value2 of r8", Arrays.toString(gamestate_circles[2]) );	
+	Log.d("The value2 of r8", Arrays.toString(gamestate_circles[3]) );	
+	Log.d("The value2 of r8", Arrays.toString(gamestate_circles[4]) );	
+	Log.d("The value2 of r8", Arrays.toString(gamestate_circles[5]) );	
+	Log.d("The value2 of r8", Arrays.toString(gamestate_circles[6]) );	
+	Log.d("The value2 of r8", Arrays.toString(gamestate_circles[7]) );	
 	public void reset(View view) {
 		finish();
 		startActivity(new Intent(MainActivity.this, MainActivity.class));
