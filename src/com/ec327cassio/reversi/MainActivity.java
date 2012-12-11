@@ -1,7 +1,10 @@
 package com.ec327cassio.reversi;
 import java.util.Arrays;
 
+<<<<<<< HEAD
 import android.R.bool;
+=======
+>>>>>>> 72689bf6d745255a6a8e9b79ba3991cc9d6b777a
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -54,23 +57,42 @@ public class MainActivity extends Activity {
 
 	
 	public void setupBoard() {
+<<<<<<< HEAD
 		gamestate_int[3][4] = 0;
+=======
+		gamestate_int[4][3] = 1;
+>>>>>>> 72689bf6d745255a6a8e9b79ba3991cc9d6b777a
 		redrawBoardFromIntArray();
 		movecount++;
 		
-		gamestate_int[4][4] = 1;
+		gamestate_int[4][4] = 2;
 		redrawBoardFromIntArray();
 		movecount++;
 		
+<<<<<<< HEAD
 		gamestate_int[4][3] = 0;
 		redrawBoardFromIntArray();
 		movecount++;
 		
 		gamestate_int[3][3] = 1;
+=======
+		MainActivity.this.grid.select(3, 4);
+		gamestate_int[3][4] = 1;
 		redrawBoardFromIntArray();
 		movecount++;
 		
-	}
+		MainActivity.this.grid.select(3, 3);
+		gamestate_int[3][3] = 2;
+>>>>>>> 72689bf6d745255a6a8e9b79ba3991cc9d6b777a
+		redrawBoardFromIntArray();
+		movecount++;
+/*		
+		MainActivity.this.grid.select(0, 7);
+		gamestate_int[0][7] = 1;
+		redrawBoardFromIntArray();
+		movecount++;
+*/	
+		}
 	
 	@Override
 	//called when activity started
@@ -86,7 +108,11 @@ public class MainActivity extends Activity {
 		 //initialize gamestate_int to be an "empty" board
 		 for (int i=0; i <8; i++ ) {
 			 for (int j=0; j<8; j++) {
+<<<<<<< HEAD
 				 this.gamestate_int[j][i] = 2;
+=======
+				 this.gamestate_int[i][j] = 0;
+>>>>>>> 72689bf6d745255a6a8e9b79ba3991cc9d6b777a
 			 }
 			 
 		 }
@@ -147,22 +173,33 @@ public class MainActivity extends Activity {
 		RelativeLayout gl = (RelativeLayout) findViewById(R.id.board_view);
 		for (int i=0; i <8; i++) {
 			for (int j=0; j<8; j++) {
+<<<<<<< HEAD
 				if ((MainActivity.this.gamestate_int[j][i] == 0) //if it should be black but its null
 						&& (MainActivity.this.gamestate_circles[j][i] == null) ) {
+=======
+				if ((MainActivity.this.gamestate_int[i][j] == 1) //if it should be black but its null
+						&& (MainActivity.this.gamestate_circles[i][j] == null) ) {
+>>>>>>> 72689bf6d745255a6a8e9b79ba3991cc9d6b777a
 					MainActivity.this.grid.select(i,j);
 					gamestate_circles[j][i] = new Circle(gl.getContext(),
 							(grid.tile_width/2)+grid.selX*(grid.tile_width),(grid.tile_height/2)+grid.selY*(grid.tile_height),25,movecount%2);
 					gl.addView(gamestate_circles[j][i]);
 						
 				}
+<<<<<<< HEAD
 				else if ((MainActivity.this.gamestate_int[j][i] == 1) //if it should be white but its null
 						&& (MainActivity.this.gamestate_circles[j][i] == null) ) {
+=======
+				else if ((MainActivity.this.gamestate_int[i][j] ==2) //if it should be white but its null
+						&& (MainActivity.this.gamestate_circles[i][j] == null) ) {
+>>>>>>> 72689bf6d745255a6a8e9b79ba3991cc9d6b777a
 					MainActivity.this.grid.select(i,j);
 					gamestate_circles[j][i] = new Circle(gl.getContext(),
 							(grid.tile_width/2)+grid.selX*(grid.tile_width),(grid.tile_height/2)+grid.selY*(grid.tile_height),25,movecount%2);
 					gl.addView(gamestate_circles[j][i]);
 						
 				}
+<<<<<<< HEAD
 				else if ((MainActivity.this.gamestate_int[j][i] == 0) //if it should be black, but its white
 						&& (MainActivity.this.gamestate_circles[j][i].mPaint.getColor() != Color.BLACK) ) {
 					MainActivity.this.gamestate_circles[j][i].mPaint.setColor(Color.BLACK);
@@ -172,6 +209,17 @@ public class MainActivity extends Activity {
 						&& (MainActivity.this.gamestate_circles[j][i].mPaint.getColor() != Color.WHITE) ) {
 					MainActivity.this.gamestate_circles[j][i].mPaint.setColor(Color.WHITE);
 					MainActivity.this.gamestate_circles[j][i].invalidate(); 
+=======
+				else if ((MainActivity.this.gamestate_int[i][j] == 1) //if it should be black, but its white
+						&& (MainActivity.this.gamestate_circles[i][j].mPaint.getColor() != Color.BLACK) ) {
+					MainActivity.this.gamestate_circles[i][j].mPaint.setColor(Color.BLACK);
+					MainActivity.this.gamestate_circles[i][j].invalidate();
+				}
+				else if ((MainActivity.this.gamestate_int[i][j] == 2) //if it should be white but its black
+						&& (MainActivity.this.gamestate_circles[i][j].mPaint.getColor() != Color.WHITE) ) {
+					MainActivity.this.gamestate_circles[i][j].mPaint.setColor(Color.WHITE);
+					MainActivity.this.gamestate_circles[i][j].invalidate(); 
+>>>>>>> 72689bf6d745255a6a8e9b79ba3991cc9d6b777a
 			
 				}
 			}
@@ -181,6 +229,7 @@ public class MainActivity extends Activity {
 	public void tryMoveAtIndex(int x,int y) {
 		//get board view
 		// RelativeLayout gl = (RelativeLayout) findViewById(R.id.board_view);
+<<<<<<< HEAD
 		if(isValid(y,x, gamestate_int, movecount %2))
 		{	//make move.		
 			gamestate_int[y][x] = movecount %2;
@@ -203,8 +252,34 @@ public class MainActivity extends Activity {
 			Log.d("After update row7:", Arrays.toString(gamestate_int[6]));
 			Log.d("After update row8:", Arrays.toString(gamestate_int[7]));
 		
+=======
+		Log.d("The value of isValid is", Boolean.toString(isValid(x, y, gamestate_int, (movecount %2)+1)) );
+		if(isValid(x, y, gamestate_int, (movecount %2)+1))
+		{	//make move.		
+			gamestate_int[x][y] = (movecount %2)+1;
+			Log.d("The value of r1", Arrays.toString(gamestate_int[0]) );
+			Log.d("The value of r2", Arrays.toString(gamestate_int[1]) );
+			Log.d("The value of r3", Arrays.toString(gamestate_int[2]) );
+			Log.d("The value of r4", Arrays.toString(gamestate_int[3]) );
+			Log.d("The value of r5", Arrays.toString(gamestate_int[4]) );
+			Log.d("The value of r6", Arrays.toString(gamestate_int[5]) );
+			Log.d("The value of r7", Arrays.toString(gamestate_int[6]) );
+			Log.d("The value of r8", Arrays.toString(gamestate_int[7]) );
+			
+			gamestate_int = FixBoard(x, y, gamestate_int, (movecount %2)+1);
+>>>>>>> 72689bf6d745255a6a8e9b79ba3991cc9d6b777a
 			redrawBoardFromIntArray();
 			movecount++;
+			Log.d("The value2 of r1", Arrays.toString(gamestate_int[0]) );
+			Log.d("The value2 of r2", Arrays.toString(gamestate_int[1]) );
+			Log.d("The value2 of r3", Arrays.toString(gamestate_int[2]) );
+			Log.d("The value2 of r4", Arrays.toString(gamestate_int[3]) );
+			Log.d("The value2 of r5", Arrays.toString(gamestate_int[4]) );
+			Log.d("The value2 of r6", Arrays.toString(gamestate_int[5]) );
+			Log.d("The value2 of r7", Arrays.toString(gamestate_int[6]) );
+			Log.d("The value2 of r8", Arrays.toString(gamestate_int[7]) );
+
+			
 			MainActivity.this.gameisnotover();
 
 		}
