@@ -3,291 +3,284 @@
 //put functions here
 
 
-bool C_isValid( int x, int y, int** board, int player) {
-             bool Valid;
+bool C_isValid( int x, int y, int** board, int player)
+{
 
-             Valid = isEmpty(x,y,board) && ( (canConquerUp(x, y, player, board))	||
-            		 	 	 	 	 	 	  (canConquerDown(x, y, player, board))	||
-            		 	 	 	 	 	 	  (canConquerLeft(x, y, player, board))	||
-            		 	 	 	 	 	 	  (canConquerRight(x, y, player, board)) ||
-            		 	 	 	 	 	 	  (canConquerDL(x, y, player, board))	||
-            		 	 	 	 	 	 	  (canConquerDR(x, y, player, board))	||
-            		 	 	 	 	 	 	  (canConquerUL(x, y, player, board)) 	||
-            		 	 	 	 	 	 	  (canConquerUR(x, y, player, board))    );
+	bool Valid;
+
+	Valid = isEmpty(x,y,board) && ( (canConquerUp(x, y, player, board))		||
+            		 	 	 	(canConquerDown(x, y, player, board))	||
+            		 	 	    (canConquerLeft(x, y, player, board))	||
+            		 	 	 	(canConquerRight(x, y, player, board)) 	||
+            		 	 	 	(canConquerDL(x, y, player, board))		||
+            		 	 	 	(canConquerDR(x, y, player, board))		||
+            		 	 	 	(canConquerUL(x, y, player, board)) 	||
+            		 	 	 	(canConquerUR(x, y, player, board))    );
 
 
-             return Valid;
+	return Valid;
 
-        }
+}
 
 //=======================================================================================
-bool isEmpty(int x,int y,int** board){
+bool isEmpty(int x, int y, int** board)
+{
+	//If spot is empty, not valid
+	if(board[x][y] == 2)	//val 2 = empty
+	{ 	 return true;		}
+	else
+	{ 	 return false;		}
 
-             if(board[x][y] == 2)	//val 2 = empty
-             { 	 return true;				}
-             else
-             { 	 return false;}
 }
 //=======================================================================================
-int op(int player){
-	if(player==1)
+int op(int player)
+{	//Inverts player to make it simpler for checkline to check sandwhich states.
+	if		(player==1)
 	{		return 0;	}
-		else if (player == 0)
+	else if (player == 0)
 	{		return 1;	}
 
 }
 
 //=======================================================================================
-int checkLine(int player, int initialColumn,
- int initialRow, int directionX, int directionY, int** board) {
+int checkLine(int player, int initialColumn, int initialRow, int directionX, int directionY, int** board)
+{
+	//cline reports value of last location of checkLine
+	int cline = player; 	//input is passed through OP function which player is actually opponent
+							//value.
+	bool resolved = false;  //false as long as there are more conversions possible
 
-// stores the value of the first position with a value different than
- // the player value
- int cline = player;
- bool resolved = false;
+	int x = initialColumn;
+	int y = initialRow;
+	while (!resolved)	//will continue in direction of given inputs as long as next piece
+	{					//is an enemy piece. if Next piece is not enemy piece then it has
+						//reached the end of possible conquers
 
-  int x = initialColumn;
-    int y = initialRow;
-   while (!resolved) {
- x += directionX;
-    y += directionY;
-   // if we are inside the bounds of the board game
-      if (x >= 0 && x < 8 && y >= 0 && y < 8) {
+		x += directionX;
+		y += directionY;
+		// Conditional to keep checkline on the board
+		if (x >= 0 && x < 8 && y >= 0 && y < 8) {
 
-  if (board[x][y] != player) {
-        resolved = true;
-          cline = board[x][y];
-   }
- } else {
-     // out of bounds means resolved with no different position
-  resolved = true;
-  }
-  }
+			if (board[x][y] != player)	//If current position is players own piece
+			{							//then cline returns player's own value
+				resolved = true;		//confirming a "sandwhich" or possible conquer
+				cline = board[x][y];
+			}
+		}
 
- return cline;
-  }
+		else
+		{
+     //
+			resolved = true;	//cline = player here means it has reached end of board
+		}
+	}
+
+	return cline;	//cline = 2 means it ended on empty space
+}
 //=======================================================================================
 
-bool canConquerDL(int x, int y,int player, int** board){
-	 bool check = false;
-     // impossible to conquer if space is less than 2
-     if (x > 1 && y < 6 ) {
-
-             // impossible enclose upwards if adjacent upwards chip is not
-             // opponent
-             if (board[x-1][y+1] == op(player)) {
-
-                     int value = checkLine(op(player), (x-1), (y+1) , -1, +1, board);
-
-                     check = value ==player;
-
-             }
-     }
-     return check;
+bool canConquerDL(int x, int y,int player, int** board)
+{
+	bool check = false;
+	// conquer needs a minimum of 2 spaces to conquer so the edge cases(DL) will be false.
+	if (x > 1 && y < 6 )
+	{
+		if (board[x-1][y+1] == op(player))	//checks if DL position is an enemy
+		{	//calls checkline function to see if conversion in current direction leads to
+			//a sandwhich state.
+			int value = checkLine(op(player), (x-1), (y+1) , -1, +1, board);
+			check = value == player; //if end location of checkline = to player's own piece
+		}							 //then it is conquerable. Else, not conquerable
+	}
+	return check;
 }
 
 //=======================================================================================
 
-bool canConquerDown(int x, int y,int player, int** board){
-	 bool check = false;
-     // impossible to conquer if space is less than 2
-     if (y <6 ) {
+bool canConquerDown(int x, int y,int player, int** board)
+{
+	bool check = false;
+	// conquer needs a minimum of 2 spaces to conquer so the edge cases(D) will be false.
+	if (y <6 )
+	{
+		if (board[x][y+1] == op(player)) //checks if down position is an enemy
+		{		//calls checkline function to see if conversion in current direction leads to
+				//a sandwhich state.
+			int value = checkLine(op(player), x, (y+1) , 0, 1, board);
+			check = value ==player;	 //if end location of checkline = to player's own piece
+									 //then it is conquerable. Else, not conquerable
+		}
 
-             // impossible enclose upwards if adjacent upwards chip is not
-             // opponent
-             if (board[x][y+1] == op(player)) {
+	}
 
-                     int value = checkLine(op(player), x, (y+1) , 0, 1, board);
-                     check = value ==player;
-
-             }
-     }
-     return check;
+	return check;
 }
 
 
 //=======================================================================================
-bool canConquerDR(int x, int y,int player, int** board){
-	 bool check = false;
-     // impossible to conquer if space is less than 2
-     if (x < 6 && y < 6 ) {
-
-             // impossible enclose upwards if adjacent upwards chip is not
-             // opponent
-             if (board[x+1][y+1] == op(player)) {
-
-                     int value = checkLine(op(player), (x+1), (y+1) ,1, 1, board);
-                     check = value ==player;
-
-             }
-     }
-     return check;
-}
-
-
-
-
-//=======================================================================================
-
-bool canConquerLeft(int x, int y,int player, int** board){
-	 bool check = false;
-     // impossible to conquer if space is less than 2
-     if (x > 1 ) {
-
-             // impossible enclose upwards if adjacent upwards chip is not
-             // opponent
-             if (board[x-1][y] == op(player)) {
-
-                     int value = checkLine(op(player), (x-1), y ,-1,0, board);
-                     check = value == player;
-
-             }
-     }
-     return check;
+bool canConquerDR(int x, int y,int player, int** board)
+{
+	bool check = false;
+	// conquer needs a minimum of 2 spaces to conquer so the edge cases(DR) will be false.
+	if (x < 6 && y < 6 )
+	{
+		if (board[x+1][y+1] == op(player)) //checks DR
+		{
+			int value = checkLine(op(player), (x+1), (y+1) ,1, 1, board);
+			check = value ==player;
+		}
+	}
+	return check;
 }
 
 //=======================================================================================
 
-bool canConquerRight(int x, int y,int player, int** board){
-	 bool check = false;
-     // impossible to conquer if space is less than 2
-     if (x < 6 ) {
+bool canConquerLeft(int x, int y,int player, int** board)
+{
+	bool check = false;
+	//min space condition
+	if (x > 1 )
+	{
+		if (board[x-1][y] == op(player)) //checks left
+		{
+			int value = checkLine(op(player), (x-1), y ,-1,0, board);
+			check = value == player;
+		}
+	}
+	return check;
+}
 
-             // impossible enclose upwards if adjacent upwards chip is not
-             // opponent
-             if (board[x+1][y] == op(player)) {
+//=======================================================================================
 
-                     int value = checkLine(op(player), (x+1), y ,1,0, board);
-                     check = value == player;
-
-             }
-     }
-     return check;
+bool canConquerRight(int x, int y,int player, int** board)
+	{
+	bool check = false;
+     //min space condition
+	if (x < 6 )
+	{
+		if (board[x+1][y] == op(player)) //checks right
+		{
+			int value = checkLine(op(player), (x+1), y ,1,0, board);
+			check = value == player;
+		}
+	}
+	return check;
 }
 
 
 //=======================================================================================
-bool canConquerUL(int x, int y,int player, int** board){
-	 bool check = false;
-     // impossible to conquer if space is less than 2
-     if (x > 1 && y > 1 ) {
-
-             // impossible enclose upwards if adjacent upwards chip is not
-             // opponent
-             if (board[x-1][y-1] == op(player)) {
-
-                     int value = checkLine(op(player), (x-1), (y-1) ,-1, -1, board);
-                     check = value ==player;
-
-             }
-     }
-     return check;
+bool canConquerUL(int x, int y,int player, int** board)
+{
+	bool check = false;
+	// impossible to conquer UL if space is less than 2
+	if (x > 1 && y > 1 )
+	{
+		if (board[x-1][y-1] == op(player)) 	//check UL
+		{
+			int value = checkLine(op(player), (x-1), (y-1) ,-1, -1, board);
+			check = value == player;
+		}
+	}
+	return check;
 }
 
 
 
 //=======================================================================================
 
-bool canConquerUp(int x, int y,int player, int** board){
-	 bool check = false;
-     // impossible to conquer if space is less than 2
-     if (y > 1) {
-
-             // impossible to enclose upwards if adjacent upwards chip is not
-             // opponent
-             if (board[x][y-1] == op(player)) {
-
-                     int value = checkLine( op(player), x, (y -1) ,0,-1, board);
-                     check = value;
-
-             }
-     }
-     return check;
+bool canConquerUp(int x, int y,int player, int** board)
+{
+	bool check = false;
+	// impossible to conquer UP if space is less than 2
+	if (y > 1)
+	{
+		if (board[x][y-1] == op(player)) 	//checks up
+		{
+			int value = checkLine( op(player), x, (y -1) ,0,-1, board);
+			check = value;
+		}
+	}
+	return check;
 }
 
 //=======================================================================================
-bool canConquerUR(int x, int y,int player, int** board){
-	 bool check = false;
-     // impossible to conquer if space is less than 2
-     if (x < 6 && y > 1 ) {
-
-             // impossible enclose upwards if adjacent upwards chip is not
-             // opponent
-             if (board[x+1][y-1] == op(player)) {
-
-                     int value = checkLine(op(player), (x+1), (y-1) ,1, -1, board);
-                     check = value ==player;
-
-             }
-     }
-     return check;
+bool canConquerUR(int x, int y,int player, int** board)
+{
+	bool check = false;
+	// impossible to conquer UR if space is less than 2
+	if (x < 6 && y > 1 )
+	{
+		if (board[x+1][y-1] == op(player))//checks UR
+		{
+			int value = checkLine(op(player), (x+1), (y-1) ,1, -1, board);
+			check = value ==player;
+		}
+	}
+	return check;
 }
 
-
-
 //=======================================================================================
-
 
 int Conquer(int x, int y, int directionX, int directionY, int** board,int player)
 {
+	int X = x;		//use temp variables to store current conquer location
+	int Y = y;
 
-         //       int x = x;
-            //    int y = y;
+	bool ownChip = false;
 
-                bool ownChip = false;
+	while ( !ownChip )	//Conquers until it reaches a friendly piece
+	{
+		//direction it conquers in
+		X += directionX;
+		Y += directionY;
+		//if is not an own chip
+		if (board[X][Y] != player)
+		{
+			board[X][Y] = player;	//convert values
+		}
 
-
-                //conquer until an own chip is found
-                while ( !ownChip ) {
-                        //advancing in the given direction
-                        x += directionX;
-                        y += directionY;
-
-                        //if is not an own chip
-                        if (board[x][y] != player) {
-                                board[x][y] = player;
-                        } else {
-                                ownChip = true;
-                        }
-                }
-        }
+		else
+		{
+			ownChip = true;			//end of conquer
+		}
+	}
+}
 //=======================================================================================
 
 void C_fixBoard(int x, int y,  int** board, int player)
 {
-if(canConquerUp(  x,  y, player, board ))
-{	Conquer( x,  y, 0, -1,  board, player);	}
+	//Checks the 8 canConquer results. If it returned a value of true
+	//then fixBoard calls conquer to flip pieces in those directions
 
-if(canConquerDown(  x,  y, player, board ))
-{	Conquer( x,  y, 0, 1,  board, player);	}
+	if(canConquerUp(  x,  y, player, board ))
+		{	Conquer( x,  y, 0, -1,  board, player);	}
 
-if(canConquerLeft(  x,  y, player, board ))
-{	Conquer( x,  y, -1, 0,  board, player);	}
+	if(canConquerDown(  x,  y, player, board ))
+		{	Conquer( x,  y, 0, 1,  board, player);	}
 
-if(canConquerRight(  x,  y, player, board ))
-{	Conquer( x,  y, 1, 0,  board, player);	}
+	if(canConquerLeft(  x,  y, player, board ))
+		{	Conquer( x,  y, -1, 0,  board, player);	}
 
-if(canConquerDL(  x,  y, player, board ))
-{	Conquer( x,  y, -1, 1,  board, player);	}
+	if(canConquerRight(  x,  y, player, board ))
+		{	Conquer( x,  y, 1, 0,  board, player);	}
 
-if(canConquerDR(  x,  y, player, board ))
-{	Conquer( x,  y, 1, 1,  board, player);	}
+	if(canConquerDL(  x,  y, player, board ))
+		{	Conquer( x,  y, -1, 1,  board, player);	}
 
-if(canConquerUL(  x,  y, player, board ))
-{	Conquer( x,  y, -1, -1,  board, player);	}
+	if(canConquerDR(  x,  y, player, board ))
+		{	Conquer( x,  y, 1, 1,  board, player);	}
 
-if(canConquerUR(  x,  y, player, board ))
-{	Conquer( x,  y, 1, -1,  board, player);	}
+	if(canConquerUL(  x,  y, player, board ))
+		{	Conquer( x,  y, -1, -1,  board, player);}
+
+	if(canConquerUR(  x,  y, player, board ))
+		{	Conquer( x,  y, 1, -1,  board, player);	}
 }
 
 
 //=======================================================================================
 extern "C"{
 
-//	jboolean Java_com_ec327cassio_reversi_MainActivity_getString(JNIEnv * env, jobject )
-//	{
-//		return env->NewStringUTF(CPPgetString());
-//	}
 
 
 	JNIEXPORT jboolean JNICALL
@@ -318,14 +311,7 @@ Java_com_ec327cassio_reversi_MainActivity_isValid(JNIEnv * env, jobject obj, jin
 		return (jboolean) result;
 
 	}
-/*
-	jobjectArray a = env->NewObjectArray( n, jstring_class, NULL );
-	for ( int i = 0; i < n; ++i ) {
-	    jstring js =  some function that returns a jstring
-	    env->SetObjectArrayElement( a, i, js );
-	    env->DeleteLocalRef( js );    // Should this be here?
-	}
-*/
+
 	JNIEXPORT void JNICALL
     Java_com_ec327cassio_reversi_MainActivity_FixBoard(JNIEnv * env, jobject obj, jint x,
 	jint y, jobjectArray board, jint player)
