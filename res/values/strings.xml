@@ -10,4 +10,6 @@
 	<string name="Player2">Whites Turn</string>
 	<string name="score1">2</string>
 	<string name="score2">2</string>
+	<string name="player2score">White Count:</string>
+	<string name="player1score">Black Count:</string>
 </resources>
