@@ -240,6 +240,9 @@ int Conquer(int x, int y, int directionX, int directionY, int** board,int player
         X += directionX;
         Y += directionY;
         //if is not an own chip
+        if (board[X][Y] == 0)
+        {	ownChip = true;	}
+
         if ((board[X][Y] != player) /* &&(board[X][Y] != 0)*/ )
         {
             board[X][Y] = player;    //convert values
@@ -310,10 +313,10 @@ extern "C"{
 
 
         //properly delete the array before returning bool
-  /*      for (int k=0; k<8; k++) {
+        for (int k=0; k<8; k++) {
             delete [] the_c_board[k];
         }
-  */     delete [] the_c_board;
+     delete [] the_c_board;
         return (jboolean) result;
 
     }
@@ -354,11 +357,11 @@ extern "C"{
 
 
                 //properly delete the array before returning
-  /*          for (int k=0; k<8; k++) {
+            for (int k=0; k<8; k++) {
                     delete [] the_c_board[k];
                 }
                 delete [] the_c_board;
-*/
+
                 return myReturnable2DArray;
 
 
