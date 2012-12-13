@@ -1,7 +1,4 @@
 package com.ec327cassio.reversi;
-import java.util.Arrays;
-
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +13,9 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -156,18 +155,18 @@ public class MainActivity extends Activity {
 				if ((MainActivity.this.gamestate_int[i][j] == 1) //if it should be black but its null
 						&& (MainActivity.this.gamestate_circles[i][j] == null) ) {
 					MainActivity.this.grid.select(i,j);
-					gamestate_circles[j][i] = new Circle(gl.getContext(),
+					gamestate_circles[i][j] = new Circle(gl.getContext(),
 							(grid.tile_width/2)+grid.selX*(grid.tile_width),(grid.tile_height/2)+grid.selY*(grid.tile_height),25,movecount%2);
-					gl.addView(gamestate_circles[j][i]);
+					gl.addView(gamestate_circles[i][j]);
 						
 				}
 
 				else if ((MainActivity.this.gamestate_int[i][j] ==2) //if it should be white but its null
 						&& (MainActivity.this.gamestate_circles[i][j] == null) ) {
 					MainActivity.this.grid.select(i,j);
-					gamestate_circles[j][i] = new Circle(gl.getContext(),
+					gamestate_circles[i][j] = new Circle(gl.getContext(),
 							(grid.tile_width/2)+grid.selX*(grid.tile_width),(grid.tile_height/2)+grid.selY*(grid.tile_height),25,movecount%2);
-					gl.addView(gamestate_circles[j][i]);
+					gl.addView(gamestate_circles[i][j]);
 						
 				}
 
@@ -189,32 +188,30 @@ public class MainActivity extends Activity {
 	public void tryMoveAtIndex(int x,int y) {
 		//get board view
 		// RelativeLayout gl = (RelativeLayout) findViewById(R.id.board_view);
-
+		Button bview;
 		Log.d("The value of isValid is", Boolean.toString(isValid(x, y, gamestate_int, (movecount %2)+1)) );
 		if(isValid(x, y, gamestate_int, (movecount %2)+1))
 		{	//make move.		
 			gamestate_int[x][y] = (movecount %2)+1;
-			Log.d("The value of r1", Arrays.toString(gamestate_int[0]) );
-			Log.d("The value of r2", Arrays.toString(gamestate_int[1]) );
-			Log.d("The value of r3", Arrays.toString(gamestate_int[2]) );
-			Log.d("The value of r4", Arrays.toString(gamestate_int[3]) );
-			Log.d("The value of r5", Arrays.toString(gamestate_int[4]) );
-			Log.d("The value of r6", Arrays.toString(gamestate_int[5]) );
-			Log.d("The value of r7", Arrays.toString(gamestate_int[6]) );
-			Log.d("The value of r8", Arrays.toString(gamestate_int[7]) );
+
 			
 			gamestate_int = FixBoard(x, y, gamestate_int, (movecount %2)+1);
 			redrawBoardFromIntArray();
 			movecount++;
-			Log.d("The value2 of r1", Arrays.toString(gamestate_int[0]) );
-			Log.d("The value2 of r2", Arrays.toString(gamestate_int[1]) );
-			Log.d("The value2 of r3", Arrays.toString(gamestate_int[2]) );
-			Log.d("The value2 of r4", Arrays.toString(gamestate_int[3]) );
-			Log.d("The value2 of r5", Arrays.toString(gamestate_int[4]) );
-			Log.d("The value2 of r6", Arrays.toString(gamestate_int[5]) );
-			Log.d("The value2 of r7", Arrays.toString(gamestate_int[6]) );
-			Log.d("The value2 of r8", Arrays.toString(gamestate_int[7]) );
 
+			
+			if(movecount%2 == 0){
+			bview = (Button) findViewById(R.id.playertracker);
+			bview.setText(R.string.Player1);
+
+			}
+			if(movecount%2 == 1){
+				bview = (Button) findViewById(R.id.playertracker);
+				bview.setText(R.string.Player2);
+
+			}
+			
+			
 			
 			MainActivity.this.gameisnotover();
 
