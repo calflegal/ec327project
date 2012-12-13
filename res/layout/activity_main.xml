@@ -23,5 +23,66 @@
         android:onClick="reset"
         android:text="@string/Reset"
         android:textColor="#FFFFFFFF" />
-  
+
+    <Button
+        android:id="@+id/playertracker"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button1"
+        android:layout_alignBottom="@+id/button1"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="14dp"
+        android:clickable="false"
+        android:text="@string/Player1"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/player1count"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/playertracker"
+        android:clickable="false"
+        android:text="@string/score1"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/player2count"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/player1count"
+        android:clickable="false"
+        android:text="@integer/integer_pscore2"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/player2count"
+        android:layout_alignBottom="@+id/player2count"
+        android:layout_alignLeft="@+id/textView1"
+        android:text="@string/player2score"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/player1count"
+        android:layout_alignBottom="@+id/player1count"
+        android:layout_toLeftOf="@+id/player1count"
+        android:text="@string/player1score"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp" />
+
 </RelativeLayout>

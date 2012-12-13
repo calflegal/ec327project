@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="eight">8</integer>
+    <integer name="integer_pscore2">2</integer>
+        <integer name="integer_pscore1">2</integer>
 </resources>
