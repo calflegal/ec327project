@@ -310,10 +310,10 @@ extern "C"{
 
 
         //properly delete the array before returning bool
-        for (int k=0; k<8; k++) {
+  /*      for (int k=0; k<8; k++) {
             delete [] the_c_board[k];
         }
-        delete [] the_c_board;
+  */     delete [] the_c_board;
         return (jboolean) result;
 
     }
@@ -354,11 +354,11 @@ extern "C"{
 
 
                 //properly delete the array before returning
-            for (int k=0; k<8; k++) {
+  /*          for (int k=0; k<8; k++) {
                     delete [] the_c_board[k];
                 }
                 delete [] the_c_board;
-
+*/
                 return myReturnable2DArray;
 
 
