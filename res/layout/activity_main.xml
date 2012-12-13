@@ -34,6 +34,28 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="14dp"
         android:text="@string/Player1" 
-        android:background="#FFFFFF"/>
+        android:textColor="#FFFFFF"/>
+
+    <Button
+        android:id="@+id/player1count"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/playertracker"
+        android:text="@string/score1"
+        android:textSize="12sp"
+        android:textColor="#FFFFFF"/>
+
+    <Button
+        android:id="@+id/player2count"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/player1count"
+        android:text="@integer/integer_pscore2"
+        android:textSize="12sp" 
+        android:textColor="#FFFFFF"/>
 
 </RelativeLayout>

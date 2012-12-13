@@ -8,4 +8,6 @@
     <string name="Reset">Reset</string>
 	<string name="Player1">Blacks Turn</string>
 	<string name="Player2">Whites Turn</string>
+	<string name="score1">2</string>
+	<string name="score2">2</string>
 </resources>
