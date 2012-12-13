@@ -40,7 +40,7 @@
     <Button
         android:id="@+id/player1count"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="30dp"
+        android:layout_width="50dp"
         android:layout_height="30dp"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/playertracker"
@@ -52,7 +52,7 @@
     <Button
         android:id="@+id/player2count"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="30dp"
+        android:layout_width="50dp"
         android:layout_height="30dp"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/player1count"
